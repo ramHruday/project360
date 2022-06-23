@@ -1,11 +1,11 @@
 import { Container } from "react-bootstrap";
-import "./App.css";
-import Header from "./pages/header";
+import "./App.scss";
+import Header from "./components/header/header";
 import Main from "./pages/main/main";
 
 function App() {
   return (
-    <Container fluid className="h-100">
+    <Container fluid className="vh-100">
       <Header />
       <Main />
     </Container>

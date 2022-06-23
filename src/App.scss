@@ -1,8 +1,10 @@
+@import "variables";
+@import "~bootstrap/scss/bootstrap";
+
 .App {
   text-align: center;
   height: 100vh;
 }
-
 
 .text-overflow-ellipsis {
   display: inline-block;
