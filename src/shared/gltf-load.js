@@ -7,6 +7,10 @@ function GLTFLoad(props) {
   const { scene } = useLoader(GLTFLoader, props.obj);
   const copiedScene = useMemo(() => scene.clone(), [scene]);
 
+  // useFrame(() => {
+  //   ref.current.rotation.z += props.angle;
+  // });
+
   return (
     <mesh
       userData={props.assetId}
@@ -33,9 +37,10 @@ function GLTFLoad(props) {
             break;
         }
       }}
+      {...props}
     >
       <group>
-        <primitive object={copiedScene} {...props} />
+        <primitive object={copiedScene} />
       </group>
     </mesh>
   );

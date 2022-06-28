@@ -1,19 +1,16 @@
-import { Card } from "react-bootstrap";
+import { Modal, Text } from "@fluentui/react";
 
 function DataCard(props) {
-  console.log(props.assetId);
   return props.assetId ? (
-    <Card
-      draggable="true"
+    <Modal
+      isOpen={true}
+      isModeless={true}
+      dragOptions={true}
       className="data-card position-absolute"
-      style={{ bottom: "2%", right: 10, zIndex: 9999 }}
+      style={{ bottom: "5%", right: "2%", zIndex: 9999 }}
     >
-      <Card.Header as="h5">Stats</Card.Header>
-      <Card.Body>
-        <Card.Title>Frac pump {props.assetId}</Card.Title>
-        <Card.Text></Card.Text>
-      </Card.Body>
-    </Card>
+      <Text>{props.assetId}</Text>
+    </Modal>
   ) : null;
 }
 

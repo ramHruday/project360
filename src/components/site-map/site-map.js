@@ -1,8 +1,8 @@
 import { ContactShadows, Select } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import * as React from "react";
+import { TRUCKS } from "../../shared/dummy/sites";
 import Loader from "../../shared/loader";
-import { range } from "../../utils/common";
 import CameraButton from "./camera-btn";
 import CameraHandler from "./camera-handler";
 
@@ -33,24 +33,15 @@ function SiteMap(props) {
         // onChange={() => (props.selected ? props.setSelected(null) : null)}
         >
           <React.Suspense fallback={<Loader />}>
-            {range(1, 10).map((assetId, i) => (
+            {TRUCKS.map((truck, i) => (
               <GLTFLoad
-                key={assetId}
+                key={truck.assetId}
                 obj="/obj/truck/truck.glb"
-                position={[0, 0, 5 * i]}
-                assetId={`Frac Pump ${assetId}`}
+                position={[truck.coordinates[0], 0, truck.coordinates[1]]}
+                assetId={truck.assetId}
                 controlStyle={props.cameraType}
-                onSelect={() => props.setSelected(assetId)}
-              />
-            ))}
-            {range(11, 20).map((assetId, i) => (
-              <GLTFLoad
-                key={assetId}
-                obj="/obj/truck/truck.glb"
-                position={[20, 0, 5 * i]}
-                assetId={`Frac Pump ${assetId}`}
-                controlStyle={props.cameraType}
-                onSelect={() => props.setSelected(assetId)}
+                onSelect={() => props.setSelected(truck.assetId)}
+                rotation={truck.rotation}
               />
             ))}
           </React.Suspense>
