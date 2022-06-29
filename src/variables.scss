@@ -1,9 +1,25 @@
-// Required
-
-@import "../node_modules/bootstrap/scss/functions";
-
-$propetro-red: #00875a;
-
-$theme-colors: (
-  propetro-red: $propetro-red,
+$colors: (
+  "themePrimary": #00875a,
+  "themeLighterAlt": #f0faf7,
+  "themeLighter": #c6ecdf,
+  "themeLight": #99dbc5,
+  "themeTertiary": #49b792,
+  "themeSecondary": #12966a,
+  "themeDarkAlt": #007a51,
+  "themeDark": #006744,
+  "themeDarker": #004c32,
+  "neutralLighterAlt": #faf9f8,
+  "neutralLighter": #f3f2f1,
+  "neutralLight": #edebe9,
+  "neutralQuaternaryAlt": #e1dfdd,
+  "neutralQuaternary": #d0d0d0,
+  "neutralTertiaryAlt": #c8c6c4,
+  "neutralTertiary": #94a5c2,
+  "neutralSecondary": #788caf,
+  "neutralSecondaryAlt": #788caf,
+  "neutralPrimaryAlt": #5e759b,
+  "neutralPrimary": #172b4d,
+  "neutralDark": #354c74,
+  "black": #243a60,
+  "white": #ffffff,
 );

@@ -1,28 +1,32 @@
-import { ButtonGroup, ToggleButton } from "react-bootstrap";
+import { DefaultButton, Stack } from "@fluentui/react";
+
 import "./camera-btn.scss";
 
 function CameraButton(props) {
+  const options = [
+    { key: "map", text: "Map", iconProps: { iconName: "HandsFree" } },
+    { key: "track", text: "Track", iconProps: { iconName: "Video360Generic" } },
+    { key: "orbit", text: "Orbit", iconProps: { iconName: "Add" } },
+  ];
   return (
-    <ButtonGroup
-      className="position-absolute shadow"
+    <div
+      className="position-absolute"
       style={{ left: "50%", bottom: "2rem", zIndex: 99999 }}
     >
-      {["map", "track", "orbit"].map((radio, idx) => (
-        <ToggleButton
-          key={idx}
-          id={`radio-${idx}`}
-          type="radio"
-          // className="rounded-0"
-          variant="propetro-red"
-          name="radio"
-          value={radio}
-          checked={props.cameraType === radio}
-          onChange={(e) => props.setCameraType(radio)}
-        >
-          {radio}
-        </ToggleButton>
-      ))}
-    </ButtonGroup>
+      <Stack horizontal>
+        {options.map((op) => (
+          <DefaultButton
+            className="bg-themeLighter"
+            toggle
+            checked={props.cameraType === op.key}
+            iconProps={op.iconProps}
+            onClick={(e) => props.setCameraType(op.key)}
+          >
+            <span className="ms-hiddenLgDown">{op.text}</span>
+          </DefaultButton>
+        ))}
+      </Stack>
+    </div>
   );
 }
 

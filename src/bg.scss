@@ -1,0 +1,12 @@
+@use "variables";
+
+@each $name, $glyph in $colors {
+  .bg-#{$name} {
+    background-color: $glyph;
+
+    &:hover {
+      background-color: $glyph;
+      cursor: pointer;
+    }
+  }
+}

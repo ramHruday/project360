@@ -1,7 +1,9 @@
 export const SITES = [
   {
-    siteId: "SITE1",
-    siteOwner: "IronMan",
+    siteId: "SITEone",
+    crew: "Platinum",
+    client: "Endeavour",
+    siteOwner: "Robert Downey Jr",
     assets: {
       trucks: 10,
       blender: 1,
@@ -10,7 +12,9 @@ export const SITES = [
   },
   {
     siteId: "SITE2",
-    siteOwner: "Thor",
+    crew: "Black",
+    client: "Endeavour",
+    siteOwner: "Chris Hemsworth",
     assets: {
       trucks: 12,
       blender: 1,
@@ -19,7 +23,9 @@ export const SITES = [
   },
   {
     siteId: "SITE3",
-    siteOwner: "Cap-America",
+    crew: "White",
+    client: "Endeavour",
+    siteOwner: "Bruce Wayne",
     assets: {
       trucks: 10,
       blender: 1,
@@ -28,7 +34,119 @@ export const SITES = [
   },
   {
     siteId: "SITE4",
-    siteOwner: "IronMan",
+    crew: "PPS4",
+    client: "Endeavour",
+    siteOwner: "Brad Pitt",
+    assets: {
+      trucks: 10,
+      blender: 1,
+      sandKing: 2,
+    },
+  },
+  {
+    siteId: "SITE5",
+    crew: "Navy",
+    client: "Endeavour",
+    siteOwner: "Brad Pitt",
+    assets: {
+      trucks: 10,
+      blender: 1,
+      sandKing: 2,
+    },
+  },
+  {
+    siteId: "SITE6",
+    crew: "Green",
+    client: "Endeavour",
+    siteOwner: "Brad Pitt",
+    assets: {
+      trucks: 10,
+      blender: 1,
+      sandKing: 2,
+    },
+  },
+  {
+    siteId: "SITE7",
+    crew: "Bronze",
+    client: "Endeavour",
+    siteOwner: "Brad Pitt",
+    assets: {
+      trucks: 10,
+      blender: 1,
+      sandKing: 2,
+    },
+  },
+  {
+    siteId: "SITE8",
+    crew: "Red",
+    client: "Endeavour",
+    siteOwner: "Brad Pitt",
+    assets: {
+      trucks: 10,
+      blender: 1,
+      sandKing: 2,
+    },
+  },
+  {
+    siteId: "SITE9",
+    crew: "White",
+    client: "Endeavour",
+    siteOwner: "Brad Pitt",
+    assets: {
+      trucks: 10,
+      blender: 1,
+      sandKing: 2,
+    },
+  },
+  {
+    siteId: "SITE10",
+    crew: "White",
+    client: "Endeavour",
+    siteOwner: "Brad Pitt",
+    assets: {
+      trucks: 10,
+      blender: 1,
+      sandKing: 2,
+    },
+  },
+  {
+    siteId: "SITE11",
+    crew: "White",
+    client: "Endeavour",
+    siteOwner: "Brad Pitt",
+    assets: {
+      trucks: 10,
+      blender: 1,
+      sandKing: 2,
+    },
+  },
+  {
+    siteId: "SITE12",
+    crew: "White",
+    client: "Endeavour",
+    siteOwner: "Brad Pitt",
+    assets: {
+      trucks: 10,
+      blender: 1,
+      sandKing: 2,
+    },
+  },
+  {
+    siteId: "SITE13",
+    crew: "White",
+    client: "Endeavour",
+    siteOwner: "Brad Pitt",
+    assets: {
+      trucks: 10,
+      blender: 1,
+      sandKing: 2,
+    },
+  },
+  {
+    siteId: "SITE14",
+    crew: "White",
+    client: "Endeavour",
+    siteOwner: "Brad Pitt",
     assets: {
       trucks: 10,
       blender: 1,

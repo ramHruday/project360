@@ -1,4 +1,37 @@
-.btn-check:checked + .btn-propetro-red {
-  border: 2px solid white !important;
-  box-shadow: none;
+.ms-ChoiceField-field::before {
+  display: none;
+}
+
+.ms-ChoiceField-wrapper {
+  color: white;
+  background: #006644;
+}
+
+.ms-ChoiceField-labelWrapper {
+  margin: 0;
+  height: 1rem;
+  padding: 0.1rem;
+}
+
+.ms-ChoiceField {
+  margin: 0;
+}
+
+.ms-ChoiceField-field {
+  padding-top: 0.5rem;
+  &::after {
+    display: none;
+  }
+  &::before {
+    display: none;
+  }
+}
+
+.ms-ChoiceField-innerField {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.is-checked {
+  background: #c1c1c1;
 }

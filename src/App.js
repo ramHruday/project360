@@ -1,14 +1,20 @@
-import { Container } from "react-bootstrap";
+import { Stack } from "@fluentui/react";
 import "./App.scss";
 import Header from "./components/header/header";
 import Main from "./pages/main/main";
 
 function App() {
   return (
-    <Container fluid className="vh-100">
-      <Header />
-      <Main />
-    </Container>
+    <div className="app">
+      <Stack verticalFill>
+        <Stack.Item>
+          <Header />
+        </Stack.Item>
+        <Stack.Item verticalFill>
+          <Main />
+        </Stack.Item>
+      </Stack>
+    </div>
   );
 }
 

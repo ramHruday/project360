@@ -1,28 +1,26 @@
+import { Stack } from "@fluentui/react";
 import { useState } from "react";
-import { Col, Row } from "react-bootstrap";
 import SideBar from "../../components/side-bar/side-bar";
 import SiteMap from "../../components/site-map/site-map";
-import DataCard from "../../shared/data-card";
 import "./main.css";
 
 function Main() {
   const [cameraType, setCameraType] = useState("map");
   const [selected, setSelected] = useState(null);
   return (
-    <Row md={4} className="main-page px-1 pb-2">
-      <Col className="d-sm-none d-md-flex" md={2}>
+    <Stack horizontal wrap verticalFill className="main-page p-1">
+      <Stack.Item grow={1} className="p-0">
         <SideBar />
-      </Col>
-      <Col xs="12" md="10" className="p-0">
+      </Stack.Item>
+      <Stack.Item grow={1} className="pb-2">
         <SiteMap
           cameraType={cameraType}
           setCameraType={setCameraType}
           selected={selected}
           setSelected={setSelected}
         />
-        <DataCard assetId={selected} />
-      </Col>
-    </Row>
+      </Stack.Item>
+    </Stack>
   );
 }
 

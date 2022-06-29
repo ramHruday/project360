@@ -1,5 +1,5 @@
 import { useMsal } from "@azure/msal-react";
-import Button from "react-bootstrap/Button";
+import { DefaultButton } from "@fluentui/react";
 
 function handleLogout(instance) {
   instance.logoutPopup().catch((e) => {
@@ -14,12 +14,8 @@ export const SignOutButton = () => {
   const { instance } = useMsal();
 
   return (
-    <Button
-      variant="secondary"
-      className="ml-auto"
-      onClick={() => handleLogout(instance)}
-    >
-      Sign out using Popup
-    </Button>
+    <DefaultButton className="ml-auto" onClick={() => handleLogout(instance)}>
+      Sign out
+    </DefaultButton>
   );
 };

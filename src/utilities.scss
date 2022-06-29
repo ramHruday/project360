@@ -1,0 +1,46 @@
+@import "variables";
+
+.position-absolute {
+  position: absolute;
+}
+
+.position-relative {
+  position: relative;
+}
+.position-sticky {
+  position: sticky;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+
+// margin
+.m-2 {
+  margin: 0.5rem;
+}
+
+// cursor
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+//overflow
+
+.overflow-auto {
+  overflow: auto;
+}
+
+// display
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}

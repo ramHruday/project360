@@ -3,7 +3,7 @@ import {} from "@fluentui/react";
 import { SignInButton } from "../../shared/sign-in-btn";
 import { SignOutButton } from "../../shared/sign-out-btn";
 
-import { DefaultEffects, OverflowSet, Stack } from "@fluentui/react";
+import { OverflowSet, Stack } from "@fluentui/react";
 
 import { CommandBarButton } from "@fluentui/react/lib/Button";
 import "./header.css";
@@ -43,40 +43,42 @@ function Header() {
   };
 
   return (
-    <Stack
-      horizontal
-      horizontalAlign="space-between"
-      tokens={{ padding: "0.5rem" }}
-      style={{ boxShadow: DefaultEffects.elevation8 }}
-    >
-      <img
-        src="https://d1io3yog0oux5.cloudfront.net/_095300291fa1e4b626a3ffdcc5fc423f/propetroservices/files/theme/images/header-logo.svg"
-        alt="ProPetro logo"
-        height="15px"
-      />
-      <OverflowSet
-        items={[
-          {
-            key: "site35",
-            name: "Site 3D",
-            icon: "MoveToFolder",
-          },
-          {
-            key: "configure",
-            name: "Configure",
-            icon: "Copy",
-          },
-          {
-            key: "login",
-            onRender: () => {
-              return isAuthenticated ? <SignOutButton /> : <SignInButton />;
+    <div className="app-header">
+      <Stack
+        horizontal
+        verticalAlign="center"
+        horizontalAlign="space-between"
+        tokens={{ padding: "0.75rem" }}
+      >
+        <img
+          src="https://d1io3yog0oux5.cloudfront.net/_095300291fa1e4b626a3ffdcc5fc423f/propetroservices/files/theme/images/header-logo.svg"
+          alt="ProPetro logo"
+          style={{ width: "13.5rem" }}
+        />
+        <OverflowSet
+          items={[
+            {
+              key: "site35",
+              name: "Site 3D",
+              icon: "DonutChart",
             },
-          },
-        ]}
-        onRenderOverflowButton={onRenderOverflowButton}
-        onRenderItem={onRenderItem}
-      />
-    </Stack>
+            {
+              key: "configure",
+              name: "Configure",
+              icon: "Equalizer",
+            },
+            {
+              key: "login",
+              onRender: () => {
+                return isAuthenticated ? <SignOutButton /> : <SignInButton />;
+              },
+            },
+          ]}
+          onRenderOverflowButton={onRenderOverflowButton}
+          onRenderItem={onRenderItem}
+        />
+      </Stack>
+    </div>
   );
 }
 

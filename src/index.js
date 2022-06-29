@@ -7,14 +7,23 @@ import { MsalProvider } from "@azure/msal-react";
 import { msalConfig } from "./authConfig";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
+
+import { ThemeProvider } from "@fluentui/react";
+import { initializeIcons } from "@fluentui/react/lib/Icons";
+import { proPetroThreeDTheme } from "./theme";
+
+initializeIcons();
+
 const msalInstance = new PublicClientApplication(msalConfig);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <MsalProvider instance={msalInstance}>
-      <App />
-    </MsalProvider>
+    <ThemeProvider theme={{ palette: proPetroThreeDTheme }}>
+      <MsalProvider instance={msalInstance}>
+        <App />
+      </MsalProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
 
