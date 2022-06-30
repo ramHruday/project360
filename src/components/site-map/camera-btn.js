@@ -9,13 +9,11 @@ function CameraButton(props) {
     { key: "orbit", text: "Orbit", iconProps: { iconName: "Add" } },
   ];
   return (
-    <div
-      className="position-absolute"
-      style={{ left: "35%", bottom: "1.5rem", zIndex: 99999 }}
-    >
+    <div className="position-absolute camera-toggle-btn">
       <Stack horizontal>
         {options.map((op) => (
           <DefaultButton
+            key={op.key}
             className="bg-themeLighter"
             toggle
             checked={props.cameraType === op.key}

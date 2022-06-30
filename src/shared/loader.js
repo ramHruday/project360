@@ -1,8 +1,8 @@
 import { Spinner } from "@fluentui/react";
-import { Html, useProgress } from "@react-three/drei";
+import { Html } from "@react-three/drei";
 
 function Loader() {
-  const { progress } = useProgress();
+  // const { progress } = useProgress();
   return (
     <Html center>
       <Spinner ariaLive="assertive" labelPosition="top" />

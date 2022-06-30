@@ -28,7 +28,10 @@ function SideBar() {
 
       <div className="side-bar-list overflow-overlay pb-2">
         {items.map((item) => (
-          <div className="p-2 ms-depth-4 cursor-pointer side-bar-list-item m-1">
+          <div
+            key={item.id}
+            className="p-2 ms-depth-4 cursor-pointer side-bar-list-item m-1"
+          >
             <p className="ms-fontWeight-bold">
               {item.state?.well_name?.data || "Not available (N/A)"}
             </p>
