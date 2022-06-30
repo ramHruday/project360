@@ -8,13 +8,14 @@ import { TRUCKS } from "../../shared/dummy/sites";
 import Loader from "../../shared/loader";
 import CameraButton from "./camera-btn";
 import CameraHandler from "./camera-handler";
+import "./site-map.scss";
 
 const GLTFLoad = React.lazy(() => import("../../shared/gltf-load"));
 
 function SiteMap(props) {
   const [openModal, setOpenModal] = useState(false);
   return (
-    <Stack className="position-relative" verticalFill>
+    <Stack className="position-relative site-map-content" verticalFill>
       <CameraButton
         cameraType={props.cameraType}
         setCameraType={props.setCameraType}
