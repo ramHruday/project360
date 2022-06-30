@@ -14,7 +14,7 @@ const GLTFLoad = React.lazy(() => import("../../shared/gltf-load"));
 function SiteMap(props) {
   const [openModal, setOpenModal] = useState(false);
   return (
-    <Stack verticalFill>
+    <Stack className="position-relative" verticalFill>
       <CameraButton
         cameraType={props.cameraType}
         setCameraType={props.setCameraType}
@@ -29,8 +29,9 @@ function SiteMap(props) {
         id="site-map"
         style={{
           background: "#354c74",
-          borderRadius: "8px 8px 0px 10px",
+          borderRadius: "8px",
         }}
+        className="ms-depth-64"
         shadows
         dpr={[1, 2]}
         camera={{ position: [150, 50, 20] }}

@@ -12,7 +12,7 @@ function Main() {
       <Stack.Item grow={1} className="p-0">
         <SideBar />
       </Stack.Item>
-      <Stack.Item grow={1} className="pb-2">
+      <Stack.Item grow={1} className="pb-2 m-2">
         <SiteMap
           cameraType={cameraType}
           setCameraType={setCameraType}

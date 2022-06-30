@@ -16,7 +16,7 @@ function Header() {
     }
     return (
       <CommandBarButton
-        className="hiddenLgDown"
+        className="ms-hiddenLgDown"
         iconProps={{ iconName: item.icon }}
         menuProps={item.subMenuProps}
         text={item.name}

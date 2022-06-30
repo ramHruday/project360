@@ -17,7 +17,7 @@ function SideBar() {
   };
 
   return (
-    <Stack className="side-bar" verticalFill>
+    <Stack className="side-bar ms-hiddenLgDown" verticalFill>
       <h3 className="px-2">Sites</h3>
 
       <SearchBox
@@ -26,9 +26,9 @@ function SideBar() {
         onSearch={(newValue) => onFilterChanged(newValue)}
       />
 
-      <div className="side-bar-list overflow-overlay">
+      <div className="side-bar-list overflow-overlay pb-2">
         {items.map((item) => (
-          <div className="p-2 ms-depth-16 cursor-pointer side-bar-list-item m-1">
+          <div className="p-2 ms-depth-4 cursor-pointer side-bar-list-item m-1">
             <p className="ms-fontWeight-bold">
               {item.state?.well_name?.data || "Not available (N/A)"}
             </p>

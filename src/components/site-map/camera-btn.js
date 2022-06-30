@@ -11,7 +11,7 @@ function CameraButton(props) {
   return (
     <div
       className="position-absolute"
-      style={{ left: "50%", bottom: "2rem", zIndex: 99999 }}
+      style={{ left: "35%", bottom: "1.5rem", zIndex: 99999 }}
     >
       <Stack horizontal>
         {options.map((op) => (
