@@ -11,6 +11,12 @@
   position: sticky;
 }
 
+// padding
+
+.p-1 {
+  padding: 0.25rem;
+}
+
 .p-2 {
   padding: 0.5rem;
 }
@@ -19,9 +25,18 @@
   padding-bottom: 0.5rem;
 }
 
+.px-2 {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
 // margin
 .m-2 {
   margin: 0.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 
 // cursor
@@ -34,6 +49,10 @@
 
 .overflow-auto {
   overflow: auto;
+}
+
+.overflow-overlay {
+  overflow: overlay;
 }
 
 // display

@@ -28,7 +28,7 @@ function SiteMap(props) {
       <Canvas
         id="site-map"
         style={{
-          background: "rgb(227, 242, 253)",
+          background: "#354c74",
           borderRadius: "8px 8px 0px 10px",
         }}
         shadows

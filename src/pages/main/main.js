@@ -8,7 +8,7 @@ function Main() {
   const [cameraType, setCameraType] = useState("map");
   const [selected, setSelected] = useState(null);
   return (
-    <Stack horizontal wrap verticalFill className="main-page p-1">
+    <Stack horizontal wrap verticalFill className="main-page">
       <Stack.Item grow={1} className="p-0">
         <SideBar />
       </Stack.Item>
