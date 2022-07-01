@@ -55,7 +55,6 @@
   },
   "devDependencies": {
     "gh-pages": "^4.0.0",
-    "sass": "^1.53.0",
-    "homepage": "https://Propetro360.github.io/site360"
+    "sass": "^1.53.0"
   }
 }
