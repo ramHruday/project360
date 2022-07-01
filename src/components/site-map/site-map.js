@@ -51,7 +51,7 @@ function SiteMap(props) {
             {TRUCKS.map((truck, i) => (
               <GLTFLoad
                 key={truck.assetId}
-                obj="/obj/truck/truck.glb"
+                obj="https://site3d.blob.core.windows.net/site3d-models/truck.glb?sp=r&st=2022-07-01T13:27:22Z&se=2022-07-01T21:27:22Z&sv=2021-06-08&sr=b&sig=83LNA7zB1WF3RMm5V0wocUTnFAUdAFVarLDG46qJXnM%3D"
                 position={[truck.coordinates[0], 0, truck.coordinates[1]]}
                 assetId={truck.assetId}
                 controlStyle={props.cameraType}
