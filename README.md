@@ -1,11 +1,14 @@
-# Getting Started with Create React App
+# Getting Started
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. Install Node
+2. Install git
 
-## Available Scripts
+# now in new folder open cmd run following commands
 
-In the project directory, you can run:
+git clone https://github.com/Propetro360/Site360.git
 
-### `npm install` (Do this only in the start)
-### `npm start`
+cd site360
 
+npm install (Do this only in the start)
+
+npm start
