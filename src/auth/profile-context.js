@@ -1,6 +1,5 @@
 import { useMsal } from "@azure/msal-react";
 import React, { useEffect, useState } from "react";
-import { callApiWithToken } from "../api/fetch";
 import { loginRequest } from "../authConfig";
 import { callMsGraph } from "./graph";
 
@@ -22,11 +21,6 @@ export const ProfileContextProvider = ({ children }) => {
       .then((response) => {
         callMsGraph(response.accessToken).then((response) =>
           setGraphData(response)
-        );
-
-        callApiWithToken(
-          response.accessToken,
-          "https://propetro.intelie.com/rest/settings/download"
         );
       })
       .catch((e) => {

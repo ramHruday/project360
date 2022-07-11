@@ -2,6 +2,7 @@
 
 1. Install Node
 2. Install git
+3. Install VS Code
 
 # now in new folder open cmd run following commands
 

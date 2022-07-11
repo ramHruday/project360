@@ -2,8 +2,12 @@ import { FontWeights, mergeStyleSets, Modal, Text } from "@fluentui/react";
 import { getTheme } from "@fluentui/react/lib/Styling";
 
 import { IconButton } from "@fluentui/react/lib/Button";
+import { HIDE_KEYS } from "./dummy/hide-keys";
+import { PUMPS } from "./dummy/pumps";
+import { UNIT_MAP } from "./dummy/unit-mapping";
 
 function DataCard(props) {
+  const asset = PUMPS.find((x) => x["Pump Name"] === props.assetId);
   const theme = getTheme();
   const iconButtonStyles = {
     root: {
@@ -18,11 +22,6 @@ function DataCard(props) {
   };
 
   const contentStyles = mergeStyleSets({
-    container: {
-      display: "flex",
-      flexFlow: "column nowrap",
-      alignItems: "stretch",
-    },
     header: [
       {
         flex: "1 1 auto",
@@ -55,7 +54,10 @@ function DataCard(props) {
       className="data-card modeless-modal"
     >
       <div className={contentStyles.header}>
-        <div>Pump Stats</div>
+        <div>
+          Pump Stats{" "}
+          <span className="text-themePrimary mx-1">{props.assetId}</span>
+        </div>
         <IconButton
           styles={iconButtonStyles}
           iconProps={{ iconName: "cancel" }}
@@ -63,9 +65,18 @@ function DataCard(props) {
           onClick={props.hideModal}
         />
       </div>
-      <div className={contentStyles.body}>
-        <Text>{props.assetId}</Text>
-      </div>
+      {asset ? (
+        <div className={contentStyles.body}>
+          {Object.entries(asset)
+            .filter((x) => !!x[1] && !HIDE_KEYS.includes(x[0]))
+            .map((e, i) => (
+              <Text key={i} block variant="small">
+                <span className="ms-fontWeight-bold">{e[0]} </span> : {e[1]}{" "}
+                {UNIT_MAP[e[0]]}
+              </Text>
+            ))}
+        </div>
+      ) : null}
     </Modal>
   );
 }

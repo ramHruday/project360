@@ -1,4 +1,5 @@
 import { DefaultButton, Stack } from "@fluentui/react";
+import classNames from "classnames";
 
 import "./camera-btn.scss";
 
@@ -14,7 +15,9 @@ function CameraButton(props) {
         {options.map((op) => (
           <DefaultButton
             key={op.key}
-            className="bg-themeLighter"
+            className={classNames("bg-themeLighter", {
+              active: props.cameraType === op.key,
+            })}
             toggle
             checked={props.cameraType === op.key}
             iconProps={op.iconProps}

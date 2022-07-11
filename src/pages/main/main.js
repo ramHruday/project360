@@ -7,6 +7,15 @@ import "./main.css";
 function Main() {
   const [cameraType, setCameraType] = useState("map");
   const [selected, setSelected] = useState(null);
+
+  const toggleSelected = (id) => {
+    if (selected && selected === id) {
+      setSelected(null);
+    } else {
+      setSelected(id);
+    }
+  };
+
   return (
     <Stack horizontal wrap verticalFill className="main-page">
       <Stack.Item grow={1} className="p-0">
@@ -17,7 +26,7 @@ function Main() {
           cameraType={cameraType}
           setCameraType={setCameraType}
           selected={selected}
-          setSelected={setSelected}
+          setSelected={toggleSelected}
         />
       </Stack.Item>
     </Stack>
