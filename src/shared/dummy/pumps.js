@@ -1,32 +1,3 @@
-// export const PUMPS = [
-//   {
-//     timestamp: "2022-06-28T07:16:51.000-0500",
-//     "Pump Position": 8,
-//     Crew: "platinum",
-//     Date: "6/28/2022 7:16",
-//     "Pump Name": 4323,
-//     "Calc Horse Power": "457",
-//     "Calc Pump Rate": "",
-//     "Calc Stroke Rate": "",
-//     "Suction Pressure": "",
-//     "Discharge Pressure": 6435,
-//     "Engine Coolant Temp": 178,
-//     "Engine Oil Pressure": 51,
-//     "Engine RPM": 751,
-//     "Engine Load": 0,
-//     "Engine Hours": 9277,
-//     Voltage: 28,
-//     "Trans Gear": 0,
-//     "Trans Oil Pressure": 13,
-//     "Trans Temp": 181,
-//     "Calc Trans RPM": "",
-//     "PE Oil Pressure": 37,
-//     "PE Oil Temp": 97,
-//     "Calc PE RPM": "",
-//     "FE Vibration": -25,
-//     Brand: "AMI",
-//   },
-// ];
 export const PUMPS = [
   {
     timestamp: "2022-06-28T07:16:51.000-0500",

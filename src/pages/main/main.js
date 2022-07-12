@@ -7,6 +7,7 @@ import "./main.css";
 function Main() {
   const [cameraType, setCameraType] = useState("map");
   const [selected, setSelected] = useState(null);
+  const [isAllSelected, setAllSelected] = useState(null);
 
   const toggleSelected = (id) => {
     if (selected && selected === id) {

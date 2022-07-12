@@ -6,7 +6,7 @@ import Main from "./pages/main/main";
 
 function App() {
   return (
-    <ProfileContextProvider>
+    <ProfileContextProvider disablePopup>
       <div className="app">
         <Stack verticalFill>
           <Stack.Item>

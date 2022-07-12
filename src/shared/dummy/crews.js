@@ -1,42 +1,14 @@
 export const CREWS = [
   {
-    id: "17",
-    name: "Black",
+    id: "1",
+    name: "Platinum",
     perspective: {
-      id: 19,
+      id: 4,
     },
     state: {
       stage: {
-        data: "offline",
-        source: "crew/17",
-        log: false,
-        extra: false,
-      },
-      iron_pressure_limit: {
-        data: 15000,
-      },
-      client: {
-        data: "XTO",
-      },
-      stageNumber: {
-        data: 46,
-      },
-      well_name: {
-        data: "Silver - 703H",
-      },
-    },
-    favorite: false,
-  },
-  {
-    id: "9",
-    name: "Bronze",
-    perspective: {
-      id: 21,
-    },
-    state: {
-      stage: {
-        data: "offline",
-        source: "crew/9",
+        data: "start",
+        source: "crew/1",
         log: false,
         extra: false,
       },
@@ -44,13 +16,13 @@ export const CREWS = [
         data: 10000,
       },
       client: {
-        data: "Centennial",
+        data: "Endeavor",
       },
       stageNumber: {
-        data: 48,
+        data: 15,
       },
       well_name: {
-        data: "Barracuda",
+        data: "CARBON 12 -13 UNIT 1 - 222",
       },
     },
     favorite: false,
@@ -117,6 +89,174 @@ export const CREWS = [
     favorite: false,
   },
   {
+    id: "9",
+    name: "Bronze",
+    perspective: {
+      id: 21,
+    },
+    state: {
+      stage: {
+        data: "offline",
+        source: "crew/9",
+        log: false,
+        extra: false,
+      },
+      iron_pressure_limit: {
+        data: 10000,
+      },
+      client: {
+        data: "Centennial",
+      },
+      stageNumber: {
+        data: 48,
+      },
+      well_name: {
+        data: "Barracuda",
+      },
+    },
+    favorite: false,
+  },
+  {
+    id: "15",
+    name: "Purple",
+    perspective: {
+      id: 32,
+    },
+    state: {
+      stage: {
+        data: "start",
+        source: "crew/15",
+        log: false,
+        extra: false,
+      },
+      iron_pressure_limit: {
+        data: 10000,
+      },
+      client: {
+        data: "Endeavor",
+      },
+      stageNumber: {
+        data: 46,
+      },
+      well_name: {
+        data: "WTH 24-13 - 281",
+      },
+    },
+    favorite: false,
+  },
+  {
+    id: "16",
+    name: "White",
+    perspective: {
+      id: 29,
+    },
+    state: {
+      stage: {
+        data: "start",
+        source: "crew/16",
+        log: false,
+        extra: false,
+      },
+      iron_pressure_limit: {
+        data: 15000,
+      },
+      client: {
+        data: "XTO",
+      },
+      stageNumber: {
+        data: 13,
+      },
+      well_name: {
+        data: "PLU 28-21 Big Sinks - 107H",
+      },
+    },
+    favorite: false,
+  },
+  {
+    id: "17",
+    name: "Black",
+    perspective: {
+      id: 19,
+    },
+    state: {
+      stage: {
+        data: "offline",
+        source: "crew/17",
+        log: false,
+        extra: false,
+      },
+      iron_pressure_limit: {
+        data: 15000,
+      },
+      client: {
+        data: "XTO",
+      },
+      stageNumber: {
+        data: 46,
+      },
+      well_name: {
+        data: "Silver - 703H",
+      },
+    },
+    favorite: false,
+  },
+  {
+    id: "20",
+    name: "Red",
+    perspective: {
+      id: 33,
+    },
+    state: {
+      stage: {
+        data: "stop",
+        source: "crew/20",
+        log: false,
+        extra: false,
+      },
+      iron_pressure_limit: {
+        data: 15000,
+      },
+      client: {
+        data: "XTO",
+      },
+      stageNumber: {
+        data: 1,
+      },
+      well_name: {
+        data: "Dire Wolf Unit 2 - 1301BH BS",
+      },
+    },
+    favorite: false,
+  },
+  {
+    id: "29",
+    name: "PPS6",
+    perspective: {
+      id: 16,
+    },
+    state: {
+      stage: {
+        data: "offline",
+        source: "crew/29",
+        log: false,
+        extra: false,
+      },
+      iron_pressure_limit: {
+        data: 10000,
+      },
+      client: {
+        data: "Pioneer",
+      },
+      stageNumber: {
+        data: 79,
+      },
+      well_name: {
+        data: "NORTH BROOK 38-37 EC - 103H",
+      },
+    },
+    favorite: false,
+  },
+  {
     id: "30",
     name: "PPS1",
     perspective: {
@@ -140,62 +280,6 @@ export const CREWS = [
       },
       well_name: {
         data: "Brook B 1N - B2H - B-Section",
-      },
-    },
-    favorite: false,
-  },
-  {
-    id: "32",
-    name: "PPS2",
-    perspective: {
-      id: 12,
-    },
-    state: {
-      stage: {
-        data: "start",
-        source: "crew/32",
-        log: false,
-        extra: false,
-      },
-      iron_pressure_limit: {
-        data: 10000,
-      },
-      client: {
-        data: "Pioneer",
-      },
-      stageNumber: {
-        data: 24,
-      },
-      well_name: {
-        data: "Woody 31 - B2H B-Section",
-      },
-    },
-    favorite: false,
-  },
-  {
-    id: "34",
-    name: "PPS3",
-    perspective: {
-      id: 13,
-    },
-    state: {
-      stage: {
-        data: "start",
-        source: "crew/34",
-        log: false,
-        extra: false,
-      },
-      iron_pressure_limit: {
-        data: 10000,
-      },
-      client: {
-        data: "Pioneer",
-      },
-      stageNumber: {
-        data: 31,
-      },
-      well_name: {
-        data: "Driver C NW9 - B 2H",
       },
     },
     favorite: false,
@@ -229,31 +313,29 @@ export const CREWS = [
     favorite: false,
   },
   {
-    id: "47",
-    name: "PPS4-B",
+    id: "32",
+    name: "PPS2",
     perspective: {
-      id: 98,
+      id: 12,
     },
     state: {
       stage: {
-        data: "offline",
-        source: "crew/47",
+        data: "start",
+        source: "crew/32",
         log: false,
         extra: false,
       },
       iron_pressure_limit: {
         data: 10000,
-        auto: false,
       },
       client: {
         data: "Pioneer",
-        auto: false,
       },
       stageNumber: {
-        data: 58,
+        data: 24,
       },
       well_name: {
-        data: "WOODY 31BB - 102H",
+        data: "Woody 31 - B2H B-Section",
       },
     },
     favorite: false,
@@ -287,15 +369,15 @@ export const CREWS = [
     favorite: false,
   },
   {
-    id: "29",
-    name: "PPS6",
+    id: "34",
+    name: "PPS3",
     perspective: {
-      id: 16,
+      id: 13,
     },
     state: {
       stage: {
-        data: "offline",
-        source: "crew/29",
+        data: "start",
+        source: "crew/34",
         log: false,
         extra: false,
       },
@@ -306,10 +388,38 @@ export const CREWS = [
         data: "Pioneer",
       },
       stageNumber: {
-        data: 79,
+        data: 31,
       },
       well_name: {
-        data: "NORTH BROOK 38-37 EC - 103H",
+        data: "Driver C NW9 - B 2H",
+      },
+    },
+    favorite: false,
+  },
+  {
+    id: "38",
+    name: "TestFacility",
+    perspective: {
+      id: 73,
+    },
+    state: {
+      stage: {
+        data: "offline",
+        source: "crew/38",
+        log: false,
+        extra: false,
+      },
+      iron_pressure_limit: {
+        data: 10000,
+        auto: false,
+      },
+      stageNumber: {
+        data: "",
+        auto: false,
+      },
+      well_name: {
+        data: "",
+        auto: true,
       },
     },
     favorite: false,
@@ -345,99 +455,15 @@ export const CREWS = [
     favorite: false,
   },
   {
-    id: "1",
-    name: "Platinum",
+    id: "47",
+    name: "PPS4-B",
     perspective: {
-      id: 4,
-    },
-    state: {
-      stage: {
-        data: "start",
-        source: "crew/1",
-        log: false,
-        extra: false,
-      },
-      iron_pressure_limit: {
-        data: 10000,
-      },
-      client: {
-        data: "Endeavor",
-      },
-      stageNumber: {
-        data: 15,
-      },
-      well_name: {
-        data: "CARBON 12 -13 UNIT 1 - 222",
-      },
-    },
-    favorite: false,
-  },
-  {
-    id: "15",
-    name: "Purple",
-    perspective: {
-      id: 32,
-    },
-    state: {
-      stage: {
-        data: "start",
-        source: "crew/15",
-        log: false,
-        extra: false,
-      },
-      iron_pressure_limit: {
-        data: 10000,
-      },
-      client: {
-        data: "Endeavor",
-      },
-      stageNumber: {
-        data: 46,
-      },
-      well_name: {
-        data: "WTH 24-13 - 281",
-      },
-    },
-    favorite: false,
-  },
-  {
-    id: "20",
-    name: "Red",
-    perspective: {
-      id: 33,
-    },
-    state: {
-      stage: {
-        data: "stop",
-        source: "crew/20",
-        log: false,
-        extra: false,
-      },
-      iron_pressure_limit: {
-        data: 15000,
-      },
-      client: {
-        data: "XTO",
-      },
-      stageNumber: {
-        data: 1,
-      },
-      well_name: {
-        data: "Dire Wolf Unit 2 - 1301BH BS",
-      },
-    },
-    favorite: false,
-  },
-  {
-    id: "38",
-    name: "TestFacility",
-    perspective: {
-      id: 73,
+      id: 98,
     },
     state: {
       stage: {
         data: "offline",
-        source: "crew/38",
+        source: "crew/47",
         log: false,
         extra: false,
       },
@@ -445,41 +471,15 @@ export const CREWS = [
         data: 10000,
         auto: false,
       },
-      stageNumber: {
-        data: "",
+      client: {
+        data: "Pioneer",
         auto: false,
       },
-      well_name: {
-        data: "",
-        auto: true,
-      },
-    },
-    favorite: false,
-  },
-  {
-    id: "16",
-    name: "White",
-    perspective: {
-      id: 29,
-    },
-    state: {
-      stage: {
-        data: "start",
-        source: "crew/16",
-        log: false,
-        extra: false,
-      },
-      iron_pressure_limit: {
-        data: 15000,
-      },
-      client: {
-        data: "XTO",
-      },
       stageNumber: {
-        data: 13,
+        data: 58,
       },
       well_name: {
-        data: "PLU 28-21 Big Sinks - 107H",
+        data: "WOODY 31BB - 102H",
       },
     },
     favorite: false,

@@ -9,26 +9,27 @@ import { MODELS } from "../../shared/config/azure-gltf";
 import DataCard from "../../shared/data-card";
 import { PUMPS } from "../../shared/dummy/pumps";
 import Loader from "../../shared/loader";
+import TruckCloudGTLF from "../truck-cloud-gtlf/truck-cloud-gtlf";
 import CameraButton from "./camera-btn";
 import CameraHandler from "./camera-handler";
 import "./site-map.scss";
-
-const CloudGLTF = React.lazy(() =>
-  import("../../shared/cloud-gtlf/cloud-gtlf")
-);
+// const CloudGLTF = React.lazy(() =>
+//   import("../../shared/cloud-gtlf/cloud-gtlf")
+// );
 
 function SiteMap(props) {
   const [openModal, setOpenModal] = useState(false);
 
   const LEFT_POS_START = PUMPS.length / 2;
-  const ROTATION_LEFT = [0, 3.14, 0];
-  const ROTATION_RIGHT = [0, 0, 0];
+  const ROTATION_LEFT = [Math.PI / 2, 3.14, 0];
+  const ROTATION_RIGHT = [-Math.PI / 2, 0, 0];
 
   const [hovered, onHover] = useState(null);
   const selected = hovered ? [hovered] : undefined;
 
   return (
     <Stack className="position-relative site-map-content" verticalFill>
+      <div id="reset-cam-btn"></div>
       <CameraButton
         cameraType={props.cameraType}
         setCameraType={props.setCameraType}
@@ -50,53 +51,44 @@ function SiteMap(props) {
         className="ms-depth-64"
         shadows
         dpr={[1, 2]}
-        camera={{ position: [-10, 0, 15], fov: 30 }}
+        camera={{
+          position: [255, 200, 500],
+          fov: 35,
+          zoom: 1.2,
+          near: 1,
+          far: 5000,
+        }}
       >
-        {/* <ambientLight intensity={1} color="lightblue" /> */}
-        <directionalLight
-          intensity={2}
-          position={[150, 50, 20]}
-          penumbra={1}
-          castShadow
-        />
-        <ambientLight color={0xffffff} intensity={0.2} />
-        {/* <spotLight intensity={0.3} position={[5, 10, 50]} /> */}
-        <EffectComposer autoClear={true}>
-          <Outline
-            blur
-            visibleEdgeColor="white"
-            edgeStrength={100}
-            width={500}
-          />
-        </EffectComposer>
+        <ambientLight intensity={0.5} />
+        <pointLight position={[10, 10, 10]} intensity={0.5} />
+
         <React.Suspense fallback={<Loader />}>
-          {PUMPS.map((truck, i) => (
-            <CloudGLTF
+          {PUMPS.slice(0).map((truck, i) => (
+            <TruckCloudGTLF
               key={truck["Pump Name"]}
               position={[
-                LEFT_POS_START < i ? 20 : -20,
+                LEFT_POS_START < i ? 45 : -45,
                 0,
-                (i % LEFT_POS_START) * 10,
+                (i % LEFT_POS_START) * 40,
               ]}
               assetId={truck["Pump Name"]}
-              onClick={() => {
-                props.setSelected(truck["Pump Name"]);
-                setOpenModal(true);
+              onClick={(show) => {
+                if (show) {
+                  props.setSelected(truck["Pump Name"]);
+                }
+                setOpenModal(show);
               }}
               onHover={onHover}
-              activeMesh={selected}
+              isActive={
+                props.isAllSelected
+                  ? true
+                  : props.selected === truck["Pump Name"]
+              }
               rotation={LEFT_POS_START < i ? ROTATION_LEFT : ROTATION_RIGHT}
               cloudGlbURL={MODELS.TRUCK}
-              scale={[4, 4, 4]}
+              scale={[10, 9, 9]}
             />
           ))}
-
-          <CloudGLTF
-            position={[20, 20, 20]}
-            onHover={onHover}
-            activeMesh={selected}
-            cloudGlbURL={MODELS.TRUCK}
-          />
         </React.Suspense>
         <EffectComposer multisampling={8} autoClear={false}>
           <Outline
@@ -106,6 +98,8 @@ function SiteMap(props) {
             edgeStrength={10}
           />
         </EffectComposer>
+        {/* <ViewControls /> */}
+
         <CameraHandler controlStyle={props.cameraType} />
       </Canvas>
     </Stack>

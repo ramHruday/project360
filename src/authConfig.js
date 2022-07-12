@@ -3,7 +3,7 @@ export const msalConfig = {
     clientId: "915b59f4-a90e-4271-984d-4044492ec08f",
     authority:
       "https://login.microsoftonline.com/03899b5e-fc45-4ce6-8d67-7c2decf9f6be", // This is a URL (e.g. https://login.microsoftonline.com/{your tenant ID})
-    redirectUri: "http://localhost:3000/",
+    redirectUri: "https://propetro360.github.io/Site360/",
   },
   cache: {
     cacheLocation: "sessionStorage", // This configures where your cache will be stored
