@@ -2,16 +2,25 @@ import { Icon } from "@fluentui/react";
 import { Html } from "@react-three/drei";
 import { BBAnchor } from "../../shared/bb-anchor";
 import { PUMPS } from "../../shared/dummy/pumps";
-import { UNIT_MAP } from "../../shared/dummy/unit-mapping";
+import {
+  DEFAULT_TRUCK_CONFIG,
+  UNIT_MAP,
+} from "../../shared/dummy/unit-mapping";
 
 export default function TruckParams({ ...props }) {
   const asset = PUMPS.find((x) => x["Pump Name"] === props.assetId);
+  // const {
+  const { engine, chassis, trans, pe, fe } = DEFAULT_TRUCK_CONFIG;
+  //   isAllSelected,
+  // } = useContext(SiteConfigContext);
+  // console.log(isAllSelected, engine);
+
   return (
     <>
       <BBAnchor anchor={[1, 1, 0]}>
         <Html>
           {props.isActive &&
-          props.node.name === "Body1" &&
+          props.node.name === engine &&
           asset["Engine Load"] ? (
             <div className="content">
               <Icon iconName="LightningBolt" />
@@ -23,7 +32,7 @@ export default function TruckParams({ ...props }) {
       <BBAnchor anchor={[1, 0, 1]}>
         <Html>
           {props.isActive &&
-          props.node.name === "Body11" &&
+          props.node.name === trans &&
           asset["Trans Gear"] ? (
             <div className="content">
               <Icon iconName="Settings" />
@@ -35,7 +44,7 @@ export default function TruckParams({ ...props }) {
       <BBAnchor anchor={[1, 1, 0]}>
         <Html>
           {props.isActive &&
-          props.node.name === "Body12" &&
+          props.node.name === fe &&
           asset["Calc Horse Power"] ? (
             <div className="content">
               {asset["Calc Horse Power"] + UNIT_MAP["Calc Horse Power"]}
@@ -46,7 +55,7 @@ export default function TruckParams({ ...props }) {
       <BBAnchor anchor={[0, 0, 0]}>
         <Html>
           {props.isActive &&
-          props.node.name === "Body14" &&
+          props.node.name === pe &&
           asset["Discharge Pressure"] ? (
             <div className="content">
               <Icon iconName="Drop" />
@@ -56,7 +65,7 @@ export default function TruckParams({ ...props }) {
           ) : null}
         </Html>
       </BBAnchor>
-      {props.node.name === "Body1" ? (
+      {props.node.name === chassis ? (
         <Html transform top>
           <div className="chassis">
             <img

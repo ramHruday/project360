@@ -6,6 +6,7 @@ import * as React from "react";
 import { useState } from "react";
 import { MODELS } from "../../shared/config/azure-gltf";
 
+import CloudGLTF from "../../shared/cloud-gtlf/cloud-gtlf";
 import DataCard from "../../shared/data-card";
 import { PUMPS } from "../../shared/dummy/pumps";
 import Loader from "../../shared/loader";
@@ -19,7 +20,6 @@ import "./site-map.scss";
 
 function SiteMap(props) {
   const [openModal, setOpenModal] = useState(false);
-
   const LEFT_POS_START = PUMPS.length / 2;
   const ROTATION_LEFT = [Math.PI / 2, 3.14, 0];
   const ROTATION_RIGHT = [-Math.PI / 2, 0, 0];
@@ -67,7 +67,7 @@ function SiteMap(props) {
             <TruckCloudGTLF
               key={truck["Pump Name"]}
               position={[
-                LEFT_POS_START < i ? 45 : -45,
+                LEFT_POS_START < i ? 50 : -50,
                 0,
                 (i % LEFT_POS_START) * 40,
               ]}
@@ -84,18 +84,34 @@ function SiteMap(props) {
                   ? true
                   : props.selected === truck["Pump Name"]
               }
+              setAlertedParts={props.setAlertedParts}
               rotation={LEFT_POS_START < i ? ROTATION_LEFT : ROTATION_RIGHT}
               cloudGlbURL={MODELS.TRUCK}
               scale={[10, 9, 9]}
             />
           ))}
+
+          <CloudGLTF
+            cloudGlbURL={MODELS.MISSILE}
+            assetId={4347}
+            onClick={(show) => {
+              if (show) {
+                props.setSelected(4347);
+              }
+              setOpenModal(show);
+            }}
+            onHover={onHover}
+            isActive={props.isAllSelected ? true : props.selected === 4347}
+            scale={[8, 10, 15]}
+            position={[0, 0, 120]}
+          />
         </React.Suspense>
         <EffectComposer multisampling={8} autoClear={false}>
           <Outline
             selection={selected}
             selectionLayer={1}
             visibleEdgeColor="white"
-            edgeStrength={10}
+            edgeStrength={5}
           />
         </EffectComposer>
         {/* <ViewControls /> */}
@@ -109,3 +125,4 @@ function SiteMap(props) {
 export default SiteMap;
 
 useGLTF.preload(MODELS.TRUCK);
+useGLTF.preload(MODELS.MISSILE);

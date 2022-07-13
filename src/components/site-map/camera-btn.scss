@@ -1,7 +1,7 @@
 @import "../../variables.scss";
 .camera-toggle-btn {
   bottom: 0.5rem;
-  z-index: 99999;
+  z-index: 999999999;
   left: 50%;
   transform: translate(-50%, -50%);
   .active {

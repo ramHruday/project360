@@ -1,6 +1,6 @@
 import { useGLTF } from "@react-three/drei";
 import { useMemo, useRef } from "react";
-import { PART_COLOR } from "../dummy/unit-mapping";
+import { MISSILE_COLOR } from "../dummy/unit-mapping";
 import "./cloud-gtlf.scss";
 
 export default function CloudGLTF({ ...props }) {
@@ -14,7 +14,7 @@ export default function CloudGLTF({ ...props }) {
     });
     return scene.clone();
   }, [scene]);
-
+  console.log(scene);
   const toggleActiveMesh = (e, meshId) => {
     e.stopPropagation();
     if (meshId === props.activeMesh) {
@@ -25,17 +25,7 @@ export default function CloudGLTF({ ...props }) {
   };
 
   return (
-    <group
-      ref={group}
-      {...props}
-      dispose={null}
-      className="cursor-pointer"
-      onClick={(e) => {
-        e.stopPropagation();
-        props.onClick();
-      }}
-      rotateOnAxis={{ axis: [0, 0, 0], angle: 3.14 / 2 }}
-    >
+    <group ref={group} {...props} dispose={null} className="cursor-pointer">
       {copiedScene.children.map((_, i) => (
         <CloudGLTFGroup
           key={i + _.name}
@@ -51,7 +41,17 @@ export default function CloudGLTF({ ...props }) {
 
 function CloudGLTFGroup({ ...props }) {
   const meshRef = useRef();
-  console.log(props.node);
+  if (props.node.type === "Group") {
+    return (
+      <group rotation={props.node.rotation}>
+        {props.node.children.length > 0 &&
+          props.node.children.map((_, i) => (
+            <CloudGLTFGroup key={i + _.name} {...props} node={_} index={i} />
+          ))}
+        <meshStandardMaterial color={0xffab00} />
+      </group>
+    );
+  }
   return (
     <mesh
       geometry={props.node.geometry}
@@ -62,27 +62,13 @@ function CloudGLTFGroup({ ...props }) {
         props.onHover(meshRef);
       }}
       onPointerOut={(e) => props.onHover(null)}
-      onClick={(e) => props.toggleActiveMesh(e, meshRef)}
+      // onClick={(e) => props.toggleActiveMesh(e, meshRef)}
+      material-color={MISSILE_COLOR[props.index + 1]}
     >
-      {props.node.children.length > 0 && (
-        <group>
-          {props.node.children.map((_, i) => (
-            <CloudGLTFGroup key={i + _.name} {...props} node={_} index={i} />
-          ))}
-        </group>
-      )}
-      <meshStandardMaterial
-        color={
-          props.node.name === "Chassis" ? 0xffffff : PART_COLOR[props.index]
-        }
-        // metalness={1}
-        // roughness={0.4}
-        // ambientIntensity={0.2}
-        // aoMapIntensity={1}
-        // envMapIntensity={1}
-        // displacementScale={2.436143}
-        // normalScale={1.0}
-      />
+      {props.node.children.length > 0 &&
+        props.node.children.map((_, i) => (
+          <CloudGLTFGroup key={i + _.name} {...props} node={_} index={i} />
+        ))}
     </mesh>
   );
 }

@@ -1,5 +1,4 @@
 import { useGLTF } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import { PART_COLOR } from "../../shared/dummy/unit-mapping";
 import "./truck-cloud-gtlf.scss";
@@ -9,7 +8,6 @@ export default function TruckCloudGTLF({ ...props }) {
   const { scene } = useGLTF(props.cloudGlbURL);
   const group = useRef();
 
-  useFrame(({ camera }) => console.log(camera));
   const copiedScene = useMemo(() => {
     scene.children.forEach(function (object) {
       if (object.isMesh) {
@@ -53,6 +51,26 @@ export default function TruckCloudGTLF({ ...props }) {
 
 function TruckCloudGTLFGroup({ ...props }) {
   const meshRef = useRef();
+  // const [eI, setEI] = useState(1);
+  // const asset = PUMPS.find((x) => x["Pump Name"] === props.assetId);
+
+  // const { engine, pe, trans } = DEFAULT_TRUCK_CONFIG;
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     if (asset["Engine Load"] < 30 && props.node.name === engine) {
+  //       setEI(eI === 0.7 ? 1 : 0.7);
+  //     }
+  //     if (asset["Discharge Pressure"] < 6500 && props.node.name === pe) {
+  //       setEI(eI === 0.7 ? 1 : 0.7);
+  //     }
+  //     if (!asset["Trans Gear"] && props.node.name === trans) {
+  //       setEI(eI === 0.7 ? 1 : 0.7);
+  //     }
+  //   }, 500);
+  //   return () => clearInterval(interval);
+  // }, [asset, eI, props, engine, pe, trans]);
+
   return (
     <mesh
       geometry={props.node.geometry}
@@ -75,7 +93,18 @@ function TruckCloudGTLFGroup({ ...props }) {
           ))}
         </group>
       )}
-      <meshStandardMaterial color={PART_COLOR[props.index]} />
+      <meshStandardMaterial
+        color={PART_COLOR[props.index]}
+        // emissiveIntensity={eI}
+        // emissive={PART_COLOR[props.index]}
+        metalness={0.4}
+        roughness={0.4}
+        ambientIntensity={0.5}
+        aoMapIntensity={1}
+        envMapIntensity={1}
+        displacementScale={2.436143}
+        normalScale={1.0}
+      />
       <TruckParams {...props} />
     </mesh>
   );

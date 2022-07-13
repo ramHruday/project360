@@ -26,3 +26,15 @@ export const UNIT_MAP = {
 export const PART_COLOR = [
   0x0052cc, 0xff5630, 0xffab00, 0x36b37e, 0x00b8d9, 0x7a869a, 0x505f79,
 ];
+
+export const MISSILE_COLOR = [
+  0x0052cc, 0xff5630, 0x010203, 0x36b37e, 0x010203, 0x010203, 0x010203,
+];
+
+export const DEFAULT_TRUCK_CONFIG = {
+  engine: "Body1",
+  trans: "Body11",
+  fe: "Body12",
+  pe: "Body14",
+  chassis: "Body1",
+};

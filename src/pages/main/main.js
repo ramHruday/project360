@@ -7,7 +7,7 @@ import "./main.css";
 function Main() {
   const [cameraType, setCameraType] = useState("map");
   const [selected, setSelected] = useState(null);
-  const [isAllSelected, setAllSelected] = useState(null);
+  const [alertedParts, setAlertedParts] = useState(null);
 
   const toggleSelected = (id) => {
     if (selected && selected === id) {
@@ -28,6 +28,11 @@ function Main() {
           setCameraType={setCameraType}
           selected={selected}
           setSelected={toggleSelected}
+          alertedParts={alertedParts}
+          setAlertedParts={(p) => {
+            setAlertedParts(p);
+            console.log(p);
+          }}
         />
       </Stack.Item>
     </Stack>
