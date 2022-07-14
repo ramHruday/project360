@@ -6,6 +6,7 @@ import { SignOutButton } from "../../shared/sign-out-btn";
 import { OverflowSet, Stack } from "@fluentui/react";
 
 import { CommandBarButton } from "@fluentui/react/lib/Button";
+import SidePanelBtn from "../side-panel/side-panel";
 import "./header.css";
 
 function Header() {
@@ -51,6 +52,7 @@ function Header() {
         horizontalAlign="space-between"
         tokens={{ padding: "0.75rem" }}
       >
+        <SidePanelBtn />
         <img
           src="https://d1io3yog0oux5.cloudfront.net/_095300291fa1e4b626a3ffdcc5fc423f/propetroservices/files/theme/images/header-logo.svg"
           alt="ProPetro logo"
