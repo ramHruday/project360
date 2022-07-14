@@ -4,10 +4,10 @@ import { Canvas } from "@react-three/fiber";
 import { EffectComposer, Outline } from "@react-three/postprocessing";
 import * as React from "react";
 import { useState } from "react";
-import { MODELS } from "../../shared/config/azure-gltf";
+import { MODELS } from "../../config/azure-gltf";
 
+import { PUMPS } from "../../config/pumps";
 import CloudGLTF from "../../shared/cloud-gtlf/cloud-gtlf";
-import { PUMPS } from "../../shared/dummy/pumps";
 import Loader from "../../shared/loader";
 import TruckCloudGTLF from "../truck-cloud-gtlf/truck-cloud-gtlf";
 import CameraButton from "./camera-btn";

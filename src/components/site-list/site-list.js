@@ -4,7 +4,7 @@ import { Text } from "@fluentui/react";
 import { Persona, PersonaSize } from "@fluentui/react/lib/Persona";
 import { SearchBox } from "@fluentui/react/lib/SearchBox";
 
-import { CREWS } from "../../shared/dummy/crews";
+import { CREWS } from "../../config/crews";
 import "./site-list.scss";
 
 function SiteList(props) {

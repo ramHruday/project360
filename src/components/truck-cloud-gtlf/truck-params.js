@@ -1,11 +1,8 @@
 import { Icon } from "@fluentui/react";
 import { Html } from "@react-three/drei";
+import { PUMPS } from "../../config/pumps";
+import { DEFAULT_TRUCK_CONFIG, UNIT_MAP } from "../../config/unit-mapping";
 import { BBAnchor } from "../../shared/bb-anchor";
-import { PUMPS } from "../../shared/dummy/pumps";
-import {
-  DEFAULT_TRUCK_CONFIG,
-  UNIT_MAP,
-} from "../../shared/dummy/unit-mapping";
 
 export default function TruckParams({ ...props }) {
   const asset = PUMPS.find((x) => x["Pump Name"] === props.assetId);

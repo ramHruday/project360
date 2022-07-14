@@ -1,6 +1,6 @@
 import { useBVH, useGLTF } from "@react-three/drei";
 import { useMemo, useRef } from "react";
-import { PART_COLOR } from "../../shared/dummy/unit-mapping";
+import { PART_COLOR } from "../../config/unit-mapping";
 import "./truck-cloud-gtlf.scss";
 import TruckParams from "./truck-params";
 

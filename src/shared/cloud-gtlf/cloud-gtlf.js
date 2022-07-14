@@ -1,6 +1,6 @@
 import { useBVH, useGLTF } from "@react-three/drei";
 import { useMemo, useRef } from "react";
-import { MISSILE_COLOR } from "../dummy/unit-mapping";
+import { MISSILE_COLOR } from "../../config/unit-mapping";
 import "./cloud-gtlf.scss";
 
 export default function CloudGLTF({ ...props }) {
