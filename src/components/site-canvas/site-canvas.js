@@ -1,5 +1,5 @@
 import { Stack } from "@fluentui/react";
-import { AdaptiveEvents, useGLTF } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { EffectComposer, Outline } from "@react-three/postprocessing";
 import * as React from "react";
@@ -9,15 +9,12 @@ import { MODELS } from "../../config/azure-gltf";
 import { PUMPS } from "../../config/pumps";
 import CloudGLTF from "../../shared/cloud-gtlf/cloud-gtlf";
 import Loader from "../../shared/loader";
-import TruckCloudGTLF from "../truck-cloud-gtlf/truck-cloud-gtlf";
-import CameraButton from "./camera-btn";
-import CameraHandler from "./camera-handler";
-import "./site-map.scss";
-// const CloudGLTF = React.lazy(() =>
-//   import("../../shared/cloud-gtlf/cloud-gtlf")
-// );
+import TruckCloudGTLF from "../../shared/truck-cloud-gtlf/truck-cloud-gtlf";
+import CameraButton from "./camera/camera-btn";
+import CameraHandler from "./camera/camera-handler";
+import "./site-canvas.scss";
 
-function SiteMap(props) {
+function SiteCanvas(props) {
   const LEFT_POS_START = PUMPS.length / 2;
   const ROTATION_LEFT = [Math.PI / 2, 3.14, 0];
   const ROTATION_RIGHT = [-Math.PI / 2, 0, 0];
@@ -91,7 +88,6 @@ function SiteMap(props) {
             position={[0, -10, 140]}
           />
         </React.Suspense>
-        <AdaptiveEvents />
         <EffectComposer multisampling={8} autoClear={false}>
           <Outline
             selection={selected}
@@ -100,7 +96,6 @@ function SiteMap(props) {
             edgeStrength={5}
           />
         </EffectComposer>
-        {/* <ViewControls /> */}
 
         <CameraHandler controlStyle={props.cameraType} />
       </Canvas>
@@ -108,7 +103,7 @@ function SiteMap(props) {
   );
 }
 
-export default SiteMap;
+export default SiteCanvas;
 
 useGLTF.preload(MODELS.TRUCK);
 useGLTF.preload(MODELS.MISSILE);

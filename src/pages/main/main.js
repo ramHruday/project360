@@ -1,7 +1,7 @@
 import { Stack } from "@fluentui/react";
 import { useState } from "react";
 import SideBar from "../../components/side-bar/side-bar";
-import SiteMap from "../../components/site-map/site-map";
+import SiteCanvas from "../../components/site-canvas/site-canvas";
 import "./main.css";
 
 function Main() {
@@ -23,7 +23,7 @@ function Main() {
         <SideBar />
       </Stack.Item>
       <Stack.Item grow={1} className="pb-2 m-2">
-        <SiteMap
+        <SiteCanvas
           cameraType={cameraType}
           setCameraType={setCameraType}
           selected={selected}
