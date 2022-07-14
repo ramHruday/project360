@@ -65,7 +65,10 @@ function CloudGLTFGroup({ ...props }) {
         props.onHover(meshRef);
       }}
       onPointerOut={(e) => props.onHover(null)}
-      // onClick={(e) => props.toggleActiveMesh(e, meshRef)}
+      onClick={(e) => {
+        e.stopPropagation();
+        props.onHover(meshRef);
+      }}
       material-color={MISSILE_COLOR[props.index + 1]}
     >
       {props.node.children.length > 0 &&
