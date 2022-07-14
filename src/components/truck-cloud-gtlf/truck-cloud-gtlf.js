@@ -1,4 +1,4 @@
-import { useGLTF } from "@react-three/drei";
+import { useBVH, useGLTF } from "@react-three/drei";
 import { useMemo, useRef } from "react";
 import { PART_COLOR } from "../../shared/dummy/unit-mapping";
 import "./truck-cloud-gtlf.scss";
@@ -51,6 +51,8 @@ export default function TruckCloudGTLF({ ...props }) {
 
 function TruckCloudGTLFGroup({ ...props }) {
   const meshRef = useRef();
+  useBVH(meshRef);
+
   // const [eI, setEI] = useState(1);
   // const asset = PUMPS.find((x) => x["Pump Name"] === props.assetId);
 

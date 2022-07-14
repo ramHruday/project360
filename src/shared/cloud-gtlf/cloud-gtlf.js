@@ -1,4 +1,4 @@
-import { useGLTF } from "@react-three/drei";
+import { useBVH, useGLTF } from "@react-three/drei";
 import { useMemo, useRef } from "react";
 import { MISSILE_COLOR } from "../dummy/unit-mapping";
 import "./cloud-gtlf.scss";
@@ -14,7 +14,9 @@ export default function CloudGLTF({ ...props }) {
     });
     return scene.clone();
   }, [scene]);
+
   console.log(scene);
+
   const toggleActiveMesh = (e, meshId) => {
     e.stopPropagation();
     if (meshId === props.activeMesh) {
@@ -41,6 +43,8 @@ export default function CloudGLTF({ ...props }) {
 
 function CloudGLTFGroup({ ...props }) {
   const meshRef = useRef();
+  useBVH(meshRef);
+
   if (props.node.type === "Group") {
     return (
       <group rotation={props.node.rotation}>
@@ -48,7 +52,6 @@ function CloudGLTFGroup({ ...props }) {
           props.node.children.map((_, i) => (
             <CloudGLTFGroup key={i + _.name} {...props} node={_} index={i} />
           ))}
-        <meshStandardMaterial color={0xffab00} />
       </group>
     );
   }

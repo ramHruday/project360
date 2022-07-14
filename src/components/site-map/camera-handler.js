@@ -11,6 +11,7 @@ const CameraHandler = (props) => {
         makeDefault
         enabled={props.controlStyle === "orbit"}
         rotateSpeed={2}
+        enableDamping
       />
       <TrackballControls
         enabled={props.controlStyle === "track"}

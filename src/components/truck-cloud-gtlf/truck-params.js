@@ -27,7 +27,7 @@ export default function TruckParams({ ...props }) {
               {asset["Engine Load"] + UNIT_MAP["Engine Load"]}
             </div>
           ) : null}
-        </Html>
+        </Html>{" "}
       </BBAnchor>
       <BBAnchor anchor={[1, 0, 1]}>
         <Html>
@@ -39,7 +39,7 @@ export default function TruckParams({ ...props }) {
               {asset["Trans Gear"] + UNIT_MAP["Trans Gear"]}
             </div>
           ) : null}
-        </Html>
+        </Html>{" "}
       </BBAnchor>
       <BBAnchor anchor={[1, 1, 0]}>
         <Html>
@@ -50,7 +50,7 @@ export default function TruckParams({ ...props }) {
               {asset["Calc Horse Power"] + UNIT_MAP["Calc Horse Power"]}
             </div>
           ) : null}
-        </Html>
+        </Html>{" "}
       </BBAnchor>
       <BBAnchor anchor={[0, 0, 0]}>
         <Html>
@@ -63,7 +63,7 @@ export default function TruckParams({ ...props }) {
               {asset["Discharge Pressure"] + UNIT_MAP["Discharge Pressure"]}
             </div>
           ) : null}
-        </Html>
+        </Html>{" "}
       </BBAnchor>
       {props.node.name === chassis ? (
         <Html transform top>

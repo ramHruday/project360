@@ -31,7 +31,6 @@ function Main() {
           alertedParts={alertedParts}
           setAlertedParts={(p) => {
             setAlertedParts(p);
-            console.log(p);
           }}
         />
       </Stack.Item>

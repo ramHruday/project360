@@ -1,5 +1,5 @@
 import { Stack } from "@fluentui/react";
-import { useGLTF } from "@react-three/drei";
+import { AdaptiveEvents, useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { EffectComposer, Outline } from "@react-three/postprocessing";
 import * as React from "react";
@@ -67,9 +67,9 @@ function SiteMap(props) {
             <TruckCloudGTLF
               key={truck["Pump Name"]}
               position={[
-                LEFT_POS_START < i ? 50 : -50,
+                LEFT_POS_START < i ? 60 : -60,
                 0,
-                (i % LEFT_POS_START) * 40,
+                (i % LEFT_POS_START) * 50,
               ]}
               assetId={truck["Pump Name"]}
               onClick={(show) => {
@@ -90,7 +90,6 @@ function SiteMap(props) {
               scale={[10, 9, 9]}
             />
           ))}
-
           <CloudGLTF
             cloudGlbURL={MODELS.MISSILE}
             assetId={4347}
@@ -102,10 +101,11 @@ function SiteMap(props) {
             }}
             onHover={onHover}
             isActive={props.isAllSelected ? true : props.selected === 4347}
-            scale={[8, 10, 15]}
-            position={[0, 0, 120]}
+            scale={[14, 14, 15]}
+            position={[0, -10, 140]}
           />
         </React.Suspense>
+        <AdaptiveEvents />
         <EffectComposer multisampling={8} autoClear={false}>
           <Outline
             selection={selected}
