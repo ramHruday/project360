@@ -7,7 +7,6 @@ import { useState } from "react";
 import { MODELS } from "../../shared/config/azure-gltf";
 
 import CloudGLTF from "../../shared/cloud-gtlf/cloud-gtlf";
-import DataCard from "../../shared/data-card";
 import { PUMPS } from "../../shared/dummy/pumps";
 import Loader from "../../shared/loader";
 import TruckCloudGTLF from "../truck-cloud-gtlf/truck-cloud-gtlf";
@@ -19,7 +18,6 @@ import "./site-map.scss";
 // );
 
 function SiteMap(props) {
-  const [openModal, setOpenModal] = useState(false);
   const LEFT_POS_START = PUMPS.length / 2;
   const ROTATION_LEFT = [Math.PI / 2, 3.14, 0];
   const ROTATION_RIGHT = [-Math.PI / 2, 0, 0];
@@ -34,14 +32,6 @@ function SiteMap(props) {
         cameraType={props.cameraType}
         setCameraType={props.setCameraType}
       />
-      {props.selected ? (
-        <DataCard
-          assetId={props.selected}
-          openModal={openModal}
-          hideModal={() => setOpenModal(false)}
-        />
-      ) : null}
-
       <Canvas
         id="site-map"
         style={{
@@ -76,7 +66,6 @@ function SiteMap(props) {
                 if (show) {
                   props.setSelected(truck["Pump Name"]);
                 }
-                setOpenModal(show);
               }}
               onHover={onHover}
               isActive={
@@ -94,10 +83,7 @@ function SiteMap(props) {
             cloudGlbURL={MODELS.MISSILE}
             assetId={4347}
             onClick={(show) => {
-              if (show) {
-                props.setSelected(4347);
-              }
-              setOpenModal(show);
+              console.log("clicked on missile");
             }}
             onHover={onHover}
             isActive={props.isAllSelected ? true : props.selected === 4347}

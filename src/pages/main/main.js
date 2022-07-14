@@ -19,7 +19,7 @@ function Main() {
 
   return (
     <Stack horizontal wrap verticalFill className="main-page">
-      <Stack.Item grow={1} className="p-0">
+      <Stack.Item grow={1} className="p-0 ms-hiddenLgDown">
         <SideBar />
       </Stack.Item>
       <Stack.Item grow={1} className="pb-2 m-2">
