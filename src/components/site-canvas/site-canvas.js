@@ -1,5 +1,5 @@
 import { Stack } from "@fluentui/react";
-import { useGLTF } from "@react-three/drei";
+import { GizmoHelper, GizmoViewcube, useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { EffectComposer, Outline } from "@react-three/postprocessing";
 import * as React from "react";
@@ -9,7 +9,6 @@ import { MODELS } from "../../config/azure-gltf";
 import { PUMPS } from "../../config/pumps";
 import CloudGLTF from "../../shared/cloud-gtlf/cloud-gtlf";
 import Loader from "../../shared/loader";
-import TruckCloudGTLF from "../../shared/truck-cloud-gtlf/truck-cloud-gtlf";
 import CameraButton from "./camera/camera-btn";
 import CameraHandler from "./camera/camera-handler";
 import "./site-canvas.scss";
@@ -50,8 +49,8 @@ function SiteCanvas(props) {
         <pointLight position={[10, 10, 10]} intensity={0.5} />
 
         <React.Suspense fallback={<Loader />}>
-          {PUMPS.slice(0).map((truck, i) => (
-            <TruckCloudGTLF
+          {/* {PUMPS.slice(0).map((truck, i) => (
+            <Model
               key={truck["Pump Name"]}
               position={[
                 LEFT_POS_START < i ? 60 : -60,
@@ -73,9 +72,9 @@ function SiteCanvas(props) {
               setAlertedParts={props.setAlertedParts}
               rotation={LEFT_POS_START < i ? ROTATION_LEFT : ROTATION_RIGHT}
               cloudGlbURL={MODELS.TRUCK}
-              scale={[10, 9, 9]}
+              // scale={[10, 9, 9]}
             />
-          ))}
+          ))} */}
           <CloudGLTF
             cloudGlbURL={MODELS.MISSILE}
             assetId={4347}
@@ -96,6 +95,10 @@ function SiteCanvas(props) {
             edgeStrength={5}
           />
         </EffectComposer>
+        <GizmoHelper alignment="top-right" renderPriority={2}>
+          <GizmoViewcube />
+          {/* alternative: <GizmoViewcube /> */}
+        </GizmoHelper>
 
         <CameraHandler controlStyle={props.cameraType} />
       </Canvas>
@@ -106,4 +109,4 @@ function SiteCanvas(props) {
 export default SiteCanvas;
 
 useGLTF.preload(MODELS.TRUCK);
-useGLTF.preload(MODELS.MISSILE);
+// useGLTF.preload(MODELS.MISSILE);
