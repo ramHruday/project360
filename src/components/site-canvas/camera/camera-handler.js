@@ -5,21 +5,15 @@ import {
 } from "@react-three/drei";
 
 const CameraHandler = (props) => {
-  return (
-    <>
-      <OrbitControls
-        makeDefault
-        enabled={props.controlStyle === "orbit"}
-        rotateSpeed={2}
-        enableDamping
-      />
-      <TrackballControls
-        enabled={props.controlStyle === "track"}
-        rotateSpeed={5}
-      />
-      <MapControls enabled={props.controlStyle === "map"} panSpeed={2} />
-    </>
-  );
+  if (props.controlStyle === "orbit") {
+    return <OrbitControls makeDefault rotateSpeed={2} />;
+  }
+
+  if (props.controlStyle === "track") {
+    return <TrackballControls makeDefault rotateSpeed={5} />;
+  }
+
+  return <MapControls makeDefault panSpeed={2} />;
 };
 
 export default CameraHandler;

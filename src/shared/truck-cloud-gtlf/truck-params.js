@@ -8,18 +8,16 @@ import { BBAnchor } from "../bb-anchor";
 export default function TruckParams({ ...props }) {
   const asset = PUMPS.find((x) => x["Pump Name"] === props.assetId);
   // const {
-  const { engine, chassis, trans, pe, fe } = DEFAULT_TRUCK_CONFIG;
+  const { engine, trans, pe, fe } = DEFAULT_TRUCK_CONFIG;
   //   isAllSelected,
   // } = useContext(SiteConfigContext);
-  // console.log(isAllSelected, engine);
+  console.log(engine === props.node.name && asset["Engine Load"]);
 
   return (
     <>
       <BBAnchor anchor={[1, 1, 0]}>
         <Html>
-          {props.isActive &&
-          props.node.name === engine &&
-          asset["Engine Load"] ? (
+          {props.node.name === engine && asset["Engine Load"] ? (
             <div className="content">
               <Icon iconName="LightningBolt" />
               {asset["Engine Load"] + UNIT_MAP["Engine Load"]}
@@ -29,9 +27,7 @@ export default function TruckParams({ ...props }) {
       </BBAnchor>
       <BBAnchor anchor={[1, 0, 1]}>
         <Html>
-          {props.isActive &&
-          props.node.name === trans &&
-          asset["Trans Gear"] ? (
+          {props.node.name === trans && asset["Trans Gear"] ? (
             <div className="content">
               <Icon iconName="Settings" />
               {asset["Trans Gear"] + UNIT_MAP["Trans Gear"]}
@@ -41,9 +37,7 @@ export default function TruckParams({ ...props }) {
       </BBAnchor>
       <BBAnchor anchor={[1, 1, 0]}>
         <Html>
-          {props.isActive &&
-          props.node.name === fe &&
-          asset["Calc Horse Power"] ? (
+          {props.node.name === fe && asset["Calc Horse Power"] ? (
             <div className="content">
               {asset["Calc Horse Power"] + UNIT_MAP["Calc Horse Power"]}
             </div>
@@ -52,9 +46,7 @@ export default function TruckParams({ ...props }) {
       </BBAnchor>
       <BBAnchor anchor={[0, 0, 0]}>
         <Html>
-          {props.isActive &&
-          props.node.name === pe &&
-          asset["Discharge Pressure"] ? (
+          {props.node.name === pe && asset["Discharge Pressure"] ? (
             <div className="content">
               <Icon iconName="Drop" />
 
@@ -63,7 +55,7 @@ export default function TruckParams({ ...props }) {
           ) : null}
         </Html>{" "}
       </BBAnchor>
-      {props.node.name === chassis ? (
+      {/* {props.node.name === chassis ? (
         <Html transform top>
           <div className="chassis">
             <img
@@ -73,7 +65,7 @@ export default function TruckParams({ ...props }) {
             />
           </div>
         </Html>
-      ) : null}
+      ) : null} */}
     </>
   );
 }

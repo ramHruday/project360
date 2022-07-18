@@ -1,8 +1,10 @@
-import { useBVH, useGLTF } from "@react-three/drei";
-import { useMemo, useRef } from "react";
-import { PART_COLOR } from "../../config/color";
+import { meshBounds, useBVH, useGLTF } from "@react-three/drei";
+import React, { useMemo, useRef } from "react";
+import { MODELS } from "../../config/azure-gltf";
+import { DEFAULT_TRUCK_CONFIG } from "../../config/constants";
 import "./truck-cloud-gtlf.scss";
 import TruckParams from "./truck-params";
+const TRUCK_PARAM_NODES = Object.values(DEFAULT_TRUCK_CONFIG);
 
 export default function TruckCloudGTLF({ ...props }) {
   const { scene } = useGLTF(props.cloudGlbURL);
@@ -52,62 +54,60 @@ export default function TruckCloudGTLF({ ...props }) {
 function TruckCloudGTLFGroup({ ...props }) {
   const meshRef = useRef();
   useBVH(meshRef);
+  if (props.index > 500 || props.node?.geometry?.boundingSphere.radius < 10) {
+    return;
+  }
 
-  // const [eI, setEI] = useState(1);
-  // const asset = PUMPS.find((x) => x["Pump Name"] === props.assetId);
-
-  // const { engine, pe, trans } = DEFAULT_TRUCK_CONFIG;
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     if (asset["Engine Load"] < 30 && props.node.name === engine) {
-  //       setEI(eI === 0.7 ? 1 : 0.7);
-  //     }
-  //     if (asset["Discharge Pressure"] < 6500 && props.node.name === pe) {
-  //       setEI(eI === 0.7 ? 1 : 0.7);
-  //     }
-  //     if (!asset["Trans Gear"] && props.node.name === trans) {
-  //       setEI(eI === 0.7 ? 1 : 0.7);
-  //     }
-  //   }, 500);
-  //   return () => clearInterval(interval);
-  // }, [asset, eI, props, engine, pe, trans]);
-
-  return (
-    <mesh
-      geometry={props.node.geometry}
-      material={props.node.material}
-      ref={meshRef}
-      onPointerOut={(e) => props.onHover(null)}
-      onClick={(e) => {
-        props.toggleActiveMesh(e, meshRef);
-      }}
-    >
-      {props.node.children.length > 0 && (
-        <group>
-          {props.node.children.map((_, i) => (
+  if (props.node.type.toLowerCase() !== "mesh") {
+    return (
+      <group
+        rotation={props.node.rotation}
+        position={props.node.position}
+        scale={props.node.scale}
+      >
+        {props.node.children.length > 0 &&
+          props.node.children.map((_, i) => (
             <TruckCloudGTLFGroup
               key={i + _.name}
               {...props}
               node={_}
-              index={i}
+              index={i + props.index}
             />
           ))}
-        </group>
-      )}
-      <meshStandardMaterial
-        color={PART_COLOR[props.index]}
-        // emissiveIntensity={eI}
-        // emissive={PART_COLOR[props.index]}
-        metalness={0.4}
-        roughness={0.4}
-        ambientIntensity={0.5}
-        aoMapIntensity={1}
-        envMapIntensity={1}
-        displacementScale={2.436143}
-        normalScale={1.0}
-      />
-      <TruckParams {...props} />
-    </mesh>
-  );
+      </group>
+    );
+  }
+
+  if (props.node.type.toLowerCase() === "mesh") {
+    return (
+      <mesh
+        geometry={props.node.geometry}
+        material={props.node.material}
+        ref={meshRef}
+        raycast={meshBounds}
+        scale={props.node.scale}
+        onPointerOver={(e) => {
+          e.stopPropagation();
+          props.onHover(meshRef);
+        }}
+        onClick={(e) => {
+          console.log(props.node.name);
+          props.onHover(meshRef);
+        }}
+      >
+        {props.node.children.length > 0 &&
+          props.node.children.map((_, i) => (
+            <TruckCloudGTLFGroup
+              key={i + _.name}
+              {...props}
+              node={_}
+              index={i + props.index}
+            />
+          ))}
+        {props.isActive ? <TruckParams {...props} /> : null}
+      </mesh>
+    );
+  }
 }
+
+useGLTF.preload(MODELS.TRUCK);

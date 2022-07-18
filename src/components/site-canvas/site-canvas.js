@@ -1,5 +1,10 @@
 import { Stack } from "@fluentui/react";
-import { GizmoHelper, GizmoViewcube, useGLTF } from "@react-three/drei";
+import {
+  AdaptiveDpr,
+  GizmoHelper,
+  GizmoViewcube,
+  useGLTF,
+} from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { EffectComposer, Outline } from "@react-three/postprocessing";
 import * as React from "react";
@@ -9,14 +14,15 @@ import { MODELS } from "../../config/azure-gltf";
 import { PUMPS } from "../../config/pumps";
 import CloudGLTF from "../../shared/cloud-gtlf/cloud-gtlf";
 import Loader from "../../shared/loader";
+import TruckCloudGTLF from "../../shared/truck-cloud-gtlf/truck-cloud-gtlf";
 import CameraButton from "./camera/camera-btn";
 import CameraHandler from "./camera/camera-handler";
 import "./site-canvas.scss";
 
 function SiteCanvas(props) {
   const LEFT_POS_START = PUMPS.length / 2;
-  const ROTATION_LEFT = [Math.PI / 2, 3.14, 0];
-  const ROTATION_RIGHT = [-Math.PI / 2, 0, 0];
+  const ROTATION_LEFT = [0, -Math.PI / 2, 0];
+  const ROTATION_RIGHT = [0, Math.PI / 2, 0];
 
   const [hovered, onHover] = useState(null);
   const selected = hovered ? [hovered] : undefined;
@@ -36,12 +42,10 @@ function SiteCanvas(props) {
         }}
         className="ms-depth-64"
         shadows
-        dpr={[1, 2]}
         camera={{
-          position: [255, 200, 500],
-          fov: 35,
-          zoom: 1.2,
-          near: 1,
+          position: [10, 15, 15],
+          fov: 50,
+          near: 0.01,
           far: 5000,
         }}
       >
@@ -49,13 +53,13 @@ function SiteCanvas(props) {
         <pointLight position={[10, 10, 10]} intensity={0.5} />
 
         <React.Suspense fallback={<Loader />}>
-          {/* {PUMPS.slice(0).map((truck, i) => (
-            <Model
+          {PUMPS.slice(0).map((truck, i) => (
+            <TruckCloudGTLF
               key={truck["Pump Name"]}
               position={[
-                LEFT_POS_START < i ? 60 : -60,
+                LEFT_POS_START < i ? 10 : -10,
                 0,
-                (i % LEFT_POS_START) * 50,
+                (i % LEFT_POS_START) * 6,
               ]}
               assetId={truck["Pump Name"]}
               onClick={(show) => {
@@ -72,9 +76,8 @@ function SiteCanvas(props) {
               setAlertedParts={props.setAlertedParts}
               rotation={LEFT_POS_START < i ? ROTATION_LEFT : ROTATION_RIGHT}
               cloudGlbURL={MODELS.TRUCK}
-              // scale={[10, 9, 9]}
             />
-          ))} */}
+          ))}
           <CloudGLTF
             cloudGlbURL={MODELS.MISSILE}
             assetId={4347}
@@ -83,10 +86,11 @@ function SiteCanvas(props) {
             }}
             onHover={onHover}
             isActive={props.isAllSelected ? true : props.selected === 4347}
-            scale={[14, 14, 15]}
-            position={[0, -10, 140]}
+            position={[0, 0, 20]}
           />
         </React.Suspense>
+        <AdaptiveDpr pixelated />
+        {/* <AdaptiveEvents /> */}
         <EffectComposer multisampling={8} autoClear={false}>
           <Outline
             selection={selected}
@@ -109,4 +113,4 @@ function SiteCanvas(props) {
 export default SiteCanvas;
 
 useGLTF.preload(MODELS.TRUCK);
-// useGLTF.preload(MODELS.MISSILE);
+useGLTF.preload(MODELS.MISSILE);

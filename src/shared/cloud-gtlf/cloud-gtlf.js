@@ -15,8 +15,6 @@ export default function CloudGLTF({ ...props }) {
     return scene.clone();
   }, [scene]);
 
-  console.log(scene);
-
   const toggleActiveMesh = (e, meshId) => {
     e.stopPropagation();
     if (meshId === props.activeMesh) {
@@ -64,7 +62,10 @@ function CloudGLTFGroup({ ...props }) {
         e.stopPropagation();
         props.onHover(meshRef);
       }}
-      onPointerOut={(e) => props.onHover(null)}
+      onPointerOut={(e) => {
+        e.stopPropagation();
+        props.onHover(null);
+      }}
       onClick={(e) => {
         e.stopPropagation();
         props.onHover(meshRef);
