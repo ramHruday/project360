@@ -54,7 +54,8 @@ export default function TruckCloudGTLF({ ...props }) {
 function TruckCloudGTLFGroup({ ...props }) {
   const meshRef = useRef();
   useBVH(meshRef);
-  if (props.index > 500 || props.node?.geometry?.boundingSphere.radius < 10) {
+  console.log(props.index);
+  if (props.index > 200 || props.node?.geometry?.boundingSphere.radius < 30) {
     return;
   }
 

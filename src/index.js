@@ -10,7 +10,7 @@ import reportWebVitals from "./reportWebVitals";
 
 import { ThemeProvider } from "@fluentui/react";
 import { initializeIcons } from "@fluentui/react/lib/Icons";
-import * as serviceWorker from "./serviceWorker";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import { proPetroThreeDTheme } from "./theme";
 
 initializeIcons();
@@ -35,4 +35,4 @@ reportWebVitals();
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://cra.link/PWA
-serviceWorker.register();
+serviceWorkerRegistration.register();

@@ -4,7 +4,7 @@ module.exports = {
   credentials: {
     client_id: "DWLQZI9t0jDgbBt5CcZ5sulQVCqgmM4j",
     client_secret: "Nt4EFVAJo77BbWZv",
-    callback_url: "http://localhost:3000/Site360",
+    callback_url: "http://localhost:3000/",
   },
   scopes: {
     // Required scopes for the server-side application

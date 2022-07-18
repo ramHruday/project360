@@ -1,20 +1,12 @@
 import { Stack } from "@fluentui/react";
-import {
-  AdaptiveDpr,
-  GizmoHelper,
-  GizmoViewcube,
-  useGLTF,
-} from "@react-three/drei";
+import { AdaptiveDpr, GizmoHelper, GizmoViewcube } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { EffectComposer, Outline } from "@react-three/postprocessing";
 import * as React from "react";
 import { useState } from "react";
-import { MODELS } from "../../config/azure-gltf";
 
 import { PUMPS } from "../../config/pumps";
-import CloudGLTF from "../../shared/cloud-gtlf/cloud-gtlf";
 import Loader from "../../shared/loader";
-import TruckCloudGTLF from "../../shared/truck-cloud-gtlf/truck-cloud-gtlf";
 import CameraButton from "./camera/camera-btn";
 import CameraHandler from "./camera/camera-handler";
 import "./site-canvas.scss";
@@ -53,7 +45,7 @@ function SiteCanvas(props) {
         <pointLight position={[10, 10, 10]} intensity={0.5} />
 
         <React.Suspense fallback={<Loader />}>
-          {PUMPS.slice(0).map((truck, i) => (
+          {/* {PUMPS.slice(0).map((truck, i) => (
             <TruckCloudGTLF
               key={truck["Pump Name"]}
               position={[
@@ -87,7 +79,7 @@ function SiteCanvas(props) {
             onHover={onHover}
             isActive={props.isAllSelected ? true : props.selected === 4347}
             position={[0, 0, 20]}
-          />
+          /> */}
         </React.Suspense>
         <AdaptiveDpr pixelated />
         {/* <AdaptiveEvents /> */}
@@ -111,6 +103,3 @@ function SiteCanvas(props) {
 }
 
 export default SiteCanvas;
-
-useGLTF.preload(MODELS.TRUCK);
-useGLTF.preload(MODELS.MISSILE);
