@@ -1,21 +1,20 @@
-export async function postData(url = "", data = {}) {
+export const URL =
+  "https://propetro-qa.intelie.com/services/plugin-propetro-intern-virtual/propetro/integrations/intern/virtual/active-pump-values-by-pump/";
+
+export async function getIntelliData(url = URL) {
+  console.log(process.env);
   const response = await fetch(url, {
     method: "POST",
-    mode: "cors",
+    mode: "no-cors",
     cache: "no-cache",
     credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
-      Authorization:
-        "Basic aW50ZXJudmlydHVhbC1xYUBpbnRlbGllLmNvbS5icjo0YjJ3I3B6c0w0UDk=",
+      Authorization: `${process.env.REACT_APP_INTELLI_AUTHORIZATION}`,
     },
     redirect: "follow",
     referrerPolicy: "no-referrer",
-    body: JSON.stringify(data),
+    body: {},
   });
   return response.json();
 }
-
-postData("https://example.com/answer", { answer: 42 }).then((data) => {
-  console.log(data); // JSON data parsed by `data.json()` call
-});

@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 /public/obj
 /dump.txt
+/src/env
+/.env

@@ -1,12 +1,15 @@
 import { Stack } from "@fluentui/react";
-import { AdaptiveDpr, GizmoHelper, GizmoViewcube } from "@react-three/drei";
+import { GizmoHelper, GizmoViewcube } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { EffectComposer, Outline } from "@react-three/postprocessing";
 import * as React from "react";
 import { useState } from "react";
+import { MODELS } from "../../config/azure-gltf";
 
 import { PUMPS } from "../../config/pumps";
+import CloudGLTF from "../../shared/cloud-gtlf/cloud-gtlf";
 import Loader from "../../shared/loader";
+import TruckCloudGTLF from "../../shared/truck-cloud-gtlf/truck-cloud-gtlf";
 import CameraButton from "./camera/camera-btn";
 import CameraHandler from "./camera/camera-handler";
 import "./site-canvas.scss";
@@ -35,7 +38,7 @@ function SiteCanvas(props) {
         className="ms-depth-64"
         shadows
         camera={{
-          position: [10, 15, 15],
+          position: [10, 15, 30],
           fov: 50,
           near: 0.01,
           far: 5000,
@@ -45,7 +48,7 @@ function SiteCanvas(props) {
         <pointLight position={[10, 10, 10]} intensity={0.5} />
 
         <React.Suspense fallback={<Loader />}>
-          {/* {PUMPS.slice(0).map((truck, i) => (
+          {PUMPS.slice(0, 5).map((truck, i) => (
             <TruckCloudGTLF
               key={truck["Pump Name"]}
               position={[
@@ -55,9 +58,7 @@ function SiteCanvas(props) {
               ]}
               assetId={truck["Pump Name"]}
               onClick={(show) => {
-                if (show) {
-                  props.setSelected(truck["Pump Name"]);
-                }
+                props.setSelected(truck["Pump Name"]);
               }}
               onHover={onHover}
               isActive={
@@ -79,9 +80,9 @@ function SiteCanvas(props) {
             onHover={onHover}
             isActive={props.isAllSelected ? true : props.selected === 4347}
             position={[0, 0, 20]}
-          /> */}
+          />
         </React.Suspense>
-        <AdaptiveDpr pixelated />
+        {/* <AdaptiveDpr pixelated /> */}
         {/* <AdaptiveEvents /> */}
         <EffectComposer multisampling={8} autoClear={false}>
           <Outline

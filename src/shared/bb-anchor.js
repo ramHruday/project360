@@ -24,19 +24,19 @@ export const BBAnchor = ({ anchor, ...props }) => {
       boundingBox.setFromObject(parentRef.current);
       boundingBox.getSize(boundingBoxSize);
       let { pX, pY, pZ } = parentRef.current.position;
-      if (pX && pY && pZ) {
-        ref.current.position.set(
-          parentRef.current.position.x + (boundingBoxSize.x * anchor[0]) / 2,
-          parentRef.current.position.y + (boundingBoxSize.y * anchor[1]) / 2,
-          parentRef.current.position.z + (boundingBoxSize.z * anchor[2]) / 2
-        );
-      } else {
-        ref.current.position.set(
-          parentRef.current.geometry.boundingBox.min.x + anchor[0],
-          parentRef.current.geometry.boundingBox.min.y + anchor[1],
-          parentRef.current.geometry.boundingBox.min.z + anchor[2]
-        );
-      }
+      // if (pX && pY && pZ) {
+      ref.current.position.set(
+        parentRef.current.position.x + (boundingBoxSize.x * anchor[0]) / 2,
+        parentRef.current.position.y + (boundingBoxSize.y * anchor[1]) / 2,
+        parentRef.current.position.z + (boundingBoxSize.z * anchor[2]) / 2
+      );
+      // } else {
+      //   ref.current.position.set(
+      //     parentRef.current.geometry.boundingBox.min.x + anchor[0],
+      //     parentRef.current.geometry.boundingBox.min.y + anchor[1],
+      //     parentRef.current.geometry.boundingBox.min.z + anchor[2]
+      //   );
+      // }
     }
   });
 

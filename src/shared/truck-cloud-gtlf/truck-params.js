@@ -8,10 +8,10 @@ import { BBAnchor } from "../bb-anchor";
 export default function TruckParams({ ...props }) {
   const asset = PUMPS.find((x) => x["Pump Name"] === props.assetId);
   // const {
-  const { engine, trans, pe, fe } = DEFAULT_TRUCK_CONFIG;
+  const { engine, trans, pe, fe, chassis } = DEFAULT_TRUCK_CONFIG;
   //   isAllSelected,
   // } = useContext(SiteConfigContext);
-  console.log(engine === props.node.name && asset["Engine Load"]);
+  // console.log(engine === props.node.name && asset["Engine Load"]);
 
   return (
     <>
@@ -35,7 +35,7 @@ export default function TruckParams({ ...props }) {
           ) : null}
         </Html>{" "}
       </BBAnchor>
-      <BBAnchor anchor={[1, 1, 0]}>
+      <BBAnchor anchor={[0, 0, 0]}>
         <Html>
           {props.node.name === fe && asset["Calc Horse Power"] ? (
             <div className="content">
@@ -44,7 +44,7 @@ export default function TruckParams({ ...props }) {
           ) : null}
         </Html>{" "}
       </BBAnchor>
-      <BBAnchor anchor={[0, 0, 0]}>
+      <BBAnchor anchor={[1, 0, 0]}>
         <Html>
           {props.node.name === pe && asset["Discharge Pressure"] ? (
             <div className="content">
@@ -55,17 +55,13 @@ export default function TruckParams({ ...props }) {
           ) : null}
         </Html>{" "}
       </BBAnchor>
-      {/* {props.node.name === chassis ? (
+      <BBAnchor anchor={[0, 0, 0]}>
         <Html transform top>
-          <div className="chassis">
-            <img
-              src="https://d1io3yog0oux5.cloudfront.net/_095300291fa1e4b626a3ffdcc5fc423f/propetroservices/files/theme/images/header-logo.svg"
-              alt="ProPetro logo"
-              style={{ width: "3rem" }}
-            />
-          </div>
+          {props.node.name === chassis ? (
+            <div className="chassis">{props.node.assetId}</div>
+          ) : null}
         </Html>
-      ) : null} */}
+      </BBAnchor>
     </>
   );
 }
