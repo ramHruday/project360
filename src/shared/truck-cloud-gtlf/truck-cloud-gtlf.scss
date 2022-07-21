@@ -11,3 +11,17 @@
   align-items: center;
   min-width: 2.5rem;
 }
+
+.chassis-content {
+  cursor: pointer;
+  font-size: 8px;
+  font-weight: 300;
+  background: #004c32;
+  color: #f0f0f0;
+  padding: 3px;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-width: 3rem;
+}

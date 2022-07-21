@@ -1,15 +1,17 @@
-import { useBVH, useGLTF } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import { useMemo, useRef } from "react";
-import { MISSILE_COLOR } from "../../config/color";
+import * as THREE from "three";
+
 import "./cloud-gtlf.scss";
 
 export default function CloudGLTF({ ...props }) {
   const { scene } = useGLTF(props.cloudGlbURL);
   const group = useRef();
+
   const copiedScene = useMemo(() => {
-    scene.children.forEach(function (object) {
-      if (object.isMesh) {
-        object.material = { ...object.material };
+    scene.children.forEach(function (m) {
+      if (m.isMesh) {
+        m.material = new THREE.MeshBasicMaterial({ color: m.material.color });
       }
     });
     return scene.clone();
@@ -23,6 +25,15 @@ export default function CloudGLTF({ ...props }) {
       props.onHover(meshId);
     }
   };
+
+  if (props.fast) {
+    console.log("bleh");
+    return (
+      <group ref={group} {...props} dispose={null}>
+        <primitive object={copiedScene} />
+      </group>
+    );
+  }
 
   return (
     <group ref={group} {...props} dispose={null} className="cursor-pointer">
@@ -41,11 +52,16 @@ export default function CloudGLTF({ ...props }) {
 
 function CloudGLTFGroup({ ...props }) {
   const meshRef = useRef();
-  useBVH(meshRef);
+  // useBVH(meshRef);
 
   if (props.node.type === "Group") {
     return (
-      <group rotation={props.node.rotation}>
+      <group
+        rotation={props.node.rotation}
+        position={props.node.position}
+        scale={props.node.scale}
+        frustumCulled
+      >
         {props.node.children.length > 0 &&
           props.node.children.map((_, i) => (
             <CloudGLTFGroup key={i + _.name} {...props} node={_} index={i} />
@@ -57,7 +73,10 @@ function CloudGLTFGroup({ ...props }) {
     <mesh
       geometry={props.node.geometry}
       material={props.node.material}
+      rotation={props.node.rotation}
+      position={props.node.position}
       ref={meshRef}
+      scale={props.node.scale}
       onPointerOver={(e) => {
         e.stopPropagation();
         props.onHover(meshRef);
@@ -70,7 +89,6 @@ function CloudGLTFGroup({ ...props }) {
         e.stopPropagation();
         props.onHover(meshRef);
       }}
-      material-color={MISSILE_COLOR[props.index + 1]}
     >
       {props.node.children.length > 0 &&
         props.node.children.map((_, i) => (

@@ -1,67 +1,65 @@
 import { Icon } from "@fluentui/react";
 import { Html } from "@react-three/drei";
 import { DEFAULT_TRUCK_CONFIG } from "../../config/constants";
-import { PUMPS } from "../../config/pumps";
 import { UNIT_MAP } from "../../config/unit-mapping";
 import { BBAnchor } from "../bb-anchor";
 
 export default function TruckParams({ ...props }) {
-  const asset = PUMPS.find((x) => x["Pump Name"] === props.assetId);
   // const {
   const { engine, trans, pe, fe, chassis } = DEFAULT_TRUCK_CONFIG;
   //   isAllSelected,
   // } = useContext(SiteConfigContext);
-  // console.log(engine === props.node.name && asset["Engine Load"]);
+  // console.log(engine === props.node.name && props.pump["Engine Load"]);
 
   return (
     <>
-      <BBAnchor anchor={[1, 1, 0]}>
-        <Html>
-          {props.node.name === engine && asset["Engine Load"] ? (
+      {props.node.name === engine && props.pump["Engine Load"] ? (
+        <BBAnchor anchor={[0, 0, 0]}>
+          <Html>
             <div className="content">
               <Icon iconName="LightningBolt" />
-              {asset["Engine Load"] + UNIT_MAP["Engine Load"]}
+              {props.pump["Engine Load"] + UNIT_MAP["Engine Load"]}
             </div>
-          ) : null}
-        </Html>{" "}
-      </BBAnchor>
-      <BBAnchor anchor={[1, 0, 1]}>
-        <Html>
-          {props.node.name === trans && asset["Trans Gear"] ? (
+          </Html>
+        </BBAnchor>
+      ) : null}
+      {props.node.name === trans && props.pump["Trans Gear"] ? (
+        <BBAnchor anchor={[1, 0, 1]}>
+          <Html>
             <div className="content">
               <Icon iconName="Settings" />
-              {asset["Trans Gear"] + UNIT_MAP["Trans Gear"]}
+              {props.pump["Trans Gear"] + UNIT_MAP["Trans Gear"]}
             </div>
-          ) : null}
-        </Html>{" "}
-      </BBAnchor>
-      <BBAnchor anchor={[0, 0, 0]}>
-        <Html>
-          {props.node.name === fe && asset["Calc Horse Power"] ? (
+          </Html>
+        </BBAnchor>
+      ) : null}
+      {props.node.name === fe && props.pump["Calc Horse Power"] ? (
+        <BBAnchor anchor={[-2, -2, 0]}>
+          <Html>
             <div className="content">
-              {asset["Calc Horse Power"] + UNIT_MAP["Calc Horse Power"]}
+              {props.pump["Calc Horse Power"] + UNIT_MAP["Calc Horse Power"]}
             </div>
-          ) : null}
-        </Html>{" "}
-      </BBAnchor>
-      <BBAnchor anchor={[1, 0, 0]}>
-        <Html>
-          {props.node.name === pe && asset["Discharge Pressure"] ? (
+          </Html>
+        </BBAnchor>
+      ) : null}
+      {props.node.name === pe && props.pump["Pump Rate"] ? (
+        <BBAnchor anchor={[1, 1, 1]}>
+          <Html>
             <div className="content">
               <Icon iconName="Drop" />
 
-              {asset["Discharge Pressure"] + UNIT_MAP["Discharge Pressure"]}
+              {props.pump["Pump Rate"] + UNIT_MAP["Pump Rate"]}
             </div>
-          ) : null}
-        </Html>{" "}
-      </BBAnchor>
-      <BBAnchor anchor={[0, 0, 0]}>
-        <Html transform top>
-          {props.node.name === chassis ? (
-            <div className="chassis">{props.node.assetId}</div>
-          ) : null}
-        </Html>
-      </BBAnchor>
+          </Html>
+        </BBAnchor>
+      ) : null}
+      {props.node.name === chassis ? (
+        <BBAnchor anchor={[0, 0, 0]}>
+          <Html transform top>
+            {/* <div className="chassis-content">{props.pump.props.pumpId}</div> */}
+          </Html>
+        </BBAnchor>
+      ) : null}
     </>
   );
 }

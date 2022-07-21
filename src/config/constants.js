@@ -1,7 +1,7 @@
 export const DEFAULT_TRUCK_CONFIG = {
-  engine: "Solid1061",
-  trans: "Solid92001",
-  fe: "Solid1227",
-  pe: "Solid3042",
-  chassis: "Solid2154_20",
+  engine: "Solid1_14",
+  trans: "Solid1_29",
+  fe: "Solid1_2",
+  pe: "Solid1_53",
+  chassis: "A_body",
 };

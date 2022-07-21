@@ -1,14 +1,30 @@
 import { Stack } from "@fluentui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getIntelliData } from "../../api/post";
 import SideBar from "../../components/side-bar/side-bar";
 import SiteCanvas from "../../components/site-canvas/site-canvas";
 import "./main.css";
 
 function Main() {
   const [cameraType, setCameraType] = useState("map");
+  const [pumpsData, setPumpsData] = useState([]);
   const [selected, setSelected] = useState(null);
+  const [isAllSelected, setIsAllSelected] = useState(null);
   const [alertedParts, setAlertedParts] = useState(null);
 
+  useEffect(() => {
+    getIntelliData().then((d) => {
+      const copy = Object.entries(d).map(([k, v], i) => {
+        const m = {};
+        v.forEach((p) => {
+          m[p.mnemonic_name] = p.value;
+        });
+        return { ...m, "Pump Position": k };
+      });
+      console.log(copy);
+      setPumpsData(copy);
+    });
+  }, []);
   const toggleSelected = (id) => {
     if (selected && selected === id) {
       setSelected(null);
@@ -28,7 +44,10 @@ function Main() {
           setCameraType={setCameraType}
           selected={selected}
           setSelected={toggleSelected}
+          isAllSelected={isAllSelected}
+          setIsAllSelected={setIsAllSelected}
           alertedParts={alertedParts}
+          pumpsData={pumpsData}
           setAlertedParts={(p) => {
             setAlertedParts(p);
           }}

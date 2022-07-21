@@ -1,12 +1,10 @@
 import { Stack } from "@fluentui/react";
-import { GizmoHelper, GizmoViewcube } from "@react-three/drei";
+import { AdaptiveEvents, GizmoHelper, GizmoViewcube } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { EffectComposer, Outline } from "@react-three/postprocessing";
-import * as React from "react";
-import { useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { MODELS } from "../../config/azure-gltf";
 
-import { PUMPS } from "../../config/pumps";
 import CloudGLTF from "../../shared/cloud-gtlf/cloud-gtlf";
 import Loader from "../../shared/loader";
 import TruckCloudGTLF from "../../shared/truck-cloud-gtlf/truck-cloud-gtlf";
@@ -15,12 +13,20 @@ import CameraHandler from "./camera/camera-handler";
 import "./site-canvas.scss";
 
 function SiteCanvas(props) {
-  const LEFT_POS_START = PUMPS.length / 2;
+  const LEFT_POS_START = props.pumpsData.length / 2;
   const ROTATION_LEFT = [0, -Math.PI / 2, 0];
   const ROTATION_RIGHT = [0, Math.PI / 2, 0];
 
   const [hovered, onHover] = useState(null);
   const selected = hovered ? [hovered] : undefined;
+
+  useEffect(() => {
+    const interval = setTimeout(() => {
+      // props.setIsAllSelected(true);
+    }, 120000);
+    return () => clearTimeout(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Stack className="position-relative site-map-content" verticalFill>
@@ -35,6 +41,7 @@ function SiteCanvas(props) {
           background: "#354c74",
           borderRadius: "8px",
         }}
+        frameloop="demand"
         className="ms-depth-64"
         shadows
         camera={{
@@ -43,29 +50,34 @@ function SiteCanvas(props) {
           near: 0.01,
           far: 5000,
         }}
+        onPointerMissed={(e) => {
+          e.stopPropagation();
+          props.setSelected(null);
+        }}
       >
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} intensity={0.5} />
 
-        <React.Suspense fallback={<Loader />}>
-          {PUMPS.slice(0, 5).map((truck, i) => (
+        <Suspense fallback={<Loader />}>
+          {props.pumpsData.slice(0, 20).map((pump, i) => (
             <TruckCloudGTLF
-              key={truck["Pump Name"]}
+              key={pump["Pump Position"]}
               position={[
                 LEFT_POS_START < i ? 10 : -10,
                 0,
-                (i % LEFT_POS_START) * 6,
+                (i % LEFT_POS_START) * 4,
               ]}
-              assetId={truck["Pump Name"]}
               onClick={(show) => {
-                props.setSelected(truck["Pump Name"]);
+                props.setSelected(pump["Pump Position"]);
+                console.log(props.selected);
               }}
               onHover={onHover}
               isActive={
                 props.isAllSelected
                   ? true
-                  : props.selected === truck["Pump Name"]
+                  : props.selected === pump["Pump Position"]
               }
+              pump={pump}
               setAlertedParts={props.setAlertedParts}
               rotation={LEFT_POS_START < i ? ROTATION_LEFT : ROTATION_RIGHT}
               cloudGlbURL={MODELS.TRUCK}
@@ -79,11 +91,22 @@ function SiteCanvas(props) {
             }}
             onHover={onHover}
             isActive={props.isAllSelected ? true : props.selected === 4347}
-            position={[0, 0, 20]}
+            position={[0, 0, 15]}
           />
-        </React.Suspense>
+
+          <CloudGLTF
+            cloudGlbURL={MODELS.WELL_HEAD}
+            onClick={(show) => {
+              console.log("clicked on missile");
+            }}
+            onHover={onHover}
+            isActive={props.isAllSelected ? true : props.selected === 4347}
+            position={[0, -1, -10]}
+            scale={4}
+          />
+        </Suspense>
         {/* <AdaptiveDpr pixelated /> */}
-        {/* <AdaptiveEvents /> */}
+        <AdaptiveEvents />
         <EffectComposer multisampling={8} autoClear={false}>
           <Outline
             selection={selected}

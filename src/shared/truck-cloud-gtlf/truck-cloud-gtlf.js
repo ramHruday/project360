@@ -1,34 +1,50 @@
-import { Select, useBVH, useGLTF } from "@react-three/drei";
-import React, { useMemo, useRef } from "react";
+import { Select, useCursor, useGLTF } from "@react-three/drei";
+import { useThree } from "@react-three/fiber";
+import React, { useMemo, useRef, useState } from "react";
+import * as THREE from "three";
 import { MODELS } from "../../config/azure-gltf";
-import { DEFAULT_TRUCK_CONFIG } from "../../config/constants";
 import "./truck-cloud-gtlf.scss";
 import TruckParams from "./truck-params";
-const TRUCK_PARAM_NODES = Object.values(DEFAULT_TRUCK_CONFIG);
+// const TRUCK_PARAM_NODES = Object.values(DEFAULT_TRUCK_CONFIG);
 
 export default function TruckCloudGTLF({ ...props }) {
   const { scene } = useGLTF(props.cloudGlbURL);
   const group = useRef();
+
   const copiedScene = useMemo(() => {
+    scene.traverse((o) => {
+      if (!o.isMesh) return;
+      var prevMaterial = o.material;
+      if (o.geometry?.boundingSphere.radius > 200) {
+        o.material = new THREE.MeshLambertMaterial({
+          color: prevMaterial.color,
+          map: prevMaterial.map,
+          envMap: prevMaterial.envMap,
+        });
+      } else {
+        o.material = new THREE.MeshBasicMaterial({
+          color: prevMaterial.color,
+        });
+      }
+    });
     return scene.clone();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scene.uuid]);
 
-  const toggleActiveMesh = (e, meshId) => {
-    e.stopPropagation();
-    if (meshId === props.activeMesh) {
-      props.onHover(null);
-      props.onClick(false);
-    } else {
-      props.onHover(meshId);
-      props.onClick(true);
-    }
-  };
-
   if (props.fast) {
     return (
-      <group {...props} dispose={null}>
-        <Select box multiple onChange={(m) => props.onHover(m)}>
+      <group ref={group} {...props} dispose={null}>
+        <Select
+          box
+          multiple
+          onChange={(m) => {
+            if (m[0]) {
+              console.log(m[0]);
+              props.onHover(m[0]);
+              props.onClick(true);
+            }
+          }}
+        >
           <primitive object={copiedScene} />
         </Select>
       </group>
@@ -36,7 +52,7 @@ export default function TruckCloudGTLF({ ...props }) {
   }
 
   return (
-    <group
+    <instancedMesh
       ref={group}
       {...props}
       dispose={null}
@@ -44,26 +60,22 @@ export default function TruckCloudGTLF({ ...props }) {
       frustumCulled
     >
       {copiedScene.children.map((_, i) => (
-        <TruckCloudGTLFGroup
-          key={i + _.name}
-          {...props}
-          node={_}
-          toggleActiveMesh={toggleActiveMesh}
-          index={i}
-        />
+        <TruckCloudGTLFGroup key={i + _.name} {...props} node={_} index={i} />
       ))}
-    </group>
+    </instancedMesh>
   );
 }
 
 function TruckCloudGTLFGroup({ ...props }) {
   const meshRef = useRef();
+  const [hovered, set] = useState();
+  useCursor(hovered, "pointer");
+  const { invalidate } = useThree();
   // const [show, setShow] = useState(false);
-  useBVH(meshRef);
-  // useHelper(show && meshRef, BoxHelper, "cyan");
+  // useBVH(meshRef);
   // const { material, geometry } = useMemo(() => {}, []);
   // console.log(props.node?.geometry?.boundingSphere.radius);
-  if (props.index > 200 || props.node?.geometry?.boundingSphere.radius < 45) {
+  if (props.node?.geometry?.boundingSphere.radius < 10) {
     return;
   }
 
@@ -94,16 +106,23 @@ function TruckCloudGTLFGroup({ ...props }) {
       <mesh
         geometry={props.node.geometry}
         material={props.node.material}
+        rotation={props.node.rotation}
+        position={props.node.position}
         ref={meshRef}
         scale={props.node.scale}
         onPointerOver={(e) => {
           e.stopPropagation();
           props.onHover(meshRef);
+          set(true);
+        }}
+        onPointerOut={() => {
+          set(false);
+          props.onHover(null);
         }}
         onClick={(e) => {
-          console.log(props.node.name);
-          props.onHover(meshRef);
+          e.stopPropagation();
           props.onClick(true);
+          invalidate(1);
         }}
         frustumCulled
       >
@@ -116,7 +135,7 @@ function TruckCloudGTLFGroup({ ...props }) {
               index={i + props.index}
             />
           ))}
-        <TruckParams {...props} />
+        {props.isActive ? <TruckParams {...props} /> : null}
       </mesh>
     );
   }
