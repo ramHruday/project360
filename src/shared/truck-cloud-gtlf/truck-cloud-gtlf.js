@@ -1,4 +1,4 @@
-import { Select, useCursor, useGLTF } from "@react-three/drei";
+import { Select, useBVH, useCursor, useGLTF } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import React, { useMemo, useRef, useState } from "react";
 import * as THREE from "three";
@@ -71,11 +71,8 @@ function TruckCloudGTLFGroup({ ...props }) {
   const [hovered, set] = useState();
   useCursor(hovered, "pointer");
   const { invalidate } = useThree();
-  // const [show, setShow] = useState(false);
-  // useBVH(meshRef);
-  // const { material, geometry } = useMemo(() => {}, []);
-  // console.log(props.node?.geometry?.boundingSphere.radius);
-  if (props.node?.geometry?.boundingSphere.radius < 10) {
+  useBVH(meshRef);
+  if (props.node?.geometry?.boundingSphere.radius < 20) {
     return;
   }
 
@@ -122,7 +119,7 @@ function TruckCloudGTLFGroup({ ...props }) {
         onClick={(e) => {
           e.stopPropagation();
           props.onClick(true);
-          invalidate(1);
+          invalidate(0);
         }}
         frustumCulled
       >

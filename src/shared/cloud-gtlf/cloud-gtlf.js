@@ -1,4 +1,4 @@
-import { useGLTF } from "@react-three/drei";
+import { meshBounds, useGLTF } from "@react-three/drei";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 
@@ -76,6 +76,7 @@ function CloudGLTFGroup({ ...props }) {
       rotation={props.node.rotation}
       position={props.node.position}
       ref={meshRef}
+      raycast={meshBounds}
       scale={props.node.scale}
       onPointerOver={(e) => {
         e.stopPropagation();
