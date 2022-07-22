@@ -2,6 +2,7 @@ export const CREWS = [
   {
     id: "1",
     name: "Platinum",
+    isActive: true,
     perspective: {
       id: 4,
     },
@@ -30,6 +31,7 @@ export const CREWS = [
   {
     id: "3",
     name: "Green",
+    isActive: false,
     perspective: {
       id: 5,
     },
@@ -63,6 +65,7 @@ export const CREWS = [
   {
     id: "5",
     name: "Navy",
+    isActive: false,
     perspective: {
       id: 26,
     },
@@ -91,6 +94,7 @@ export const CREWS = [
   {
     id: "9",
     name: "Bronze",
+    isActive: false,
     perspective: {
       id: 21,
     },
@@ -119,6 +123,7 @@ export const CREWS = [
   {
     id: "15",
     name: "Purple",
+    isActive: false,
     perspective: {
       id: 32,
     },
@@ -147,6 +152,7 @@ export const CREWS = [
   {
     id: "16",
     name: "White",
+    isActive: false,
     perspective: {
       id: 29,
     },
@@ -175,6 +181,7 @@ export const CREWS = [
   {
     id: "17",
     name: "Black",
+    isActive: false,
     perspective: {
       id: 19,
     },
@@ -203,6 +210,7 @@ export const CREWS = [
   {
     id: "20",
     name: "Red",
+    isActive: false,
     perspective: {
       id: 33,
     },
@@ -231,6 +239,7 @@ export const CREWS = [
   {
     id: "29",
     name: "PPS6",
+    isActive: false,
     perspective: {
       id: 16,
     },
@@ -259,6 +268,7 @@ export const CREWS = [
   {
     id: "30",
     name: "PPS1",
+    isActive: false,
     perspective: {
       id: 11,
     },
@@ -287,6 +297,7 @@ export const CREWS = [
   {
     id: "31",
     name: "PPS4",
+    isActive: false,
     perspective: {
       id: 14,
     },
@@ -315,6 +326,7 @@ export const CREWS = [
   {
     id: "32",
     name: "PPS2",
+    isActive: false,
     perspective: {
       id: 12,
     },
@@ -343,6 +355,7 @@ export const CREWS = [
   {
     id: "33",
     name: "PPS5",
+    isActive: false,
     perspective: {
       id: 15,
     },
@@ -371,6 +384,7 @@ export const CREWS = [
   {
     id: "34",
     name: "PPS3",
+    isActive: false,
     perspective: {
       id: 13,
     },
@@ -399,6 +413,7 @@ export const CREWS = [
   {
     id: "38",
     name: "TestFacility",
+    isActive: false,
     perspective: {
       id: 73,
     },
@@ -427,6 +442,7 @@ export const CREWS = [
   {
     id: "44",
     name: "PPS6-B",
+    isActive: false,
     perspective: {
       id: 93,
     },
@@ -457,6 +473,7 @@ export const CREWS = [
   {
     id: "47",
     name: "PPS4-B",
+    isActive: false,
     perspective: {
       id: 98,
     },

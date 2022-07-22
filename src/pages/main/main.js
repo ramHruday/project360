@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getIntelliData } from "../../api/post";
 import SideBar from "../../components/side-bar/side-bar";
 import SiteCanvas from "../../components/site-canvas/site-canvas";
+import { convertIntelliData } from "../../utils/pump";
 import "./main.css";
 
 function Main() {
@@ -11,20 +12,18 @@ function Main() {
   const [selected, setSelected] = useState(null);
   const [isAllSelected, setIsAllSelected] = useState(null);
   const [alertedParts, setAlertedParts] = useState(null);
+  const callAPI = () => {
+    getIntelliData().then((d) => {
+      const copy = convertIntelliData(d);
+      setPumpsData(copy.slice(0, 20));
+    });
+  };
 
   useEffect(() => {
-    getIntelliData().then((d) => {
-      const copy = Object.entries(d).map(([k, v], i) => {
-        const m = {};
-        v.forEach((p) => {
-          m[p.mnemonic_name] = p.value;
-        });
-        return { ...m, "Pump Position": k };
-      });
-      console.log(copy);
-      setPumpsData(copy);
-    });
+    const timer = setInterval(callAPI, 10000);
+    return () => clearInterval(timer);
   }, []);
+
   const toggleSelected = (id) => {
     if (selected && selected === id) {
       setSelected(null);

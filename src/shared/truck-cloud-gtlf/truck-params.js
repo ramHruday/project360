@@ -10,7 +10,7 @@ export default function TruckParams({ ...props }) {
   //   isAllSelected,
   // } = useContext(SiteConfigContext);
   // console.log(engine === props.node.name && props.pump["Engine Load"]);
-
+  // console.log(props.pump["Pump Rate"], props.pump["Pump Position"]);
   return (
     <>
       {props.node.name === engine && props.pump["Engine Load"] ? (
@@ -55,8 +55,8 @@ export default function TruckParams({ ...props }) {
       ) : null}
       {props.node.name === chassis ? (
         <BBAnchor anchor={[0, 0, 0]}>
-          <Html transform top>
-            {/* <div className="chassis-content">{props.pump.props.pumpId}</div> */}
+          <Html transform>
+            <div className="chassis-content">{props.pump["Pump Position"]}</div>
           </Html>
         </BBAnchor>
       ) : null}

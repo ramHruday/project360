@@ -1,5 +1,5 @@
 import { Select, useBVH, useCursor, useGLTF } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import React, { useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { MODELS } from "../../config/azure-gltf";
@@ -11,12 +11,14 @@ export default function TruckCloudGTLF({ ...props }) {
   const { scene } = useGLTF(props.cloudGlbURL);
   const group = useRef();
 
+  useFrame(() => (group.current.visible = props.show), []);
+
   const copiedScene = useMemo(() => {
     scene.traverse((o) => {
       if (!o.isMesh) return;
       var prevMaterial = o.material;
-      if (o.geometry?.boundingSphere.radius > 200) {
-        o.material = new THREE.MeshLambertMaterial({
+      if (o.geometry?.boundingSphere.radius > 600) {
+        o.material = new THREE.MeshBasicMaterial({
           color: prevMaterial.color,
           map: prevMaterial.map,
           envMap: prevMaterial.envMap,
@@ -24,6 +26,8 @@ export default function TruckCloudGTLF({ ...props }) {
       } else {
         o.material = new THREE.MeshBasicMaterial({
           color: prevMaterial.color,
+          map: prevMaterial.map,
+          envMap: prevMaterial.envMap,
         });
       }
     });
@@ -52,7 +56,7 @@ export default function TruckCloudGTLF({ ...props }) {
   }
 
   return (
-    <instancedMesh
+    <group
       ref={group}
       {...props}
       dispose={null}
@@ -62,7 +66,7 @@ export default function TruckCloudGTLF({ ...props }) {
       {copiedScene.children.map((_, i) => (
         <TruckCloudGTLFGroup key={i + _.name} {...props} node={_} index={i} />
       ))}
-    </instancedMesh>
+    </group>
   );
 }
 
@@ -70,9 +74,9 @@ function TruckCloudGTLFGroup({ ...props }) {
   const meshRef = useRef();
   const [hovered, set] = useState();
   useCursor(hovered, "pointer");
-  const { invalidate } = useThree();
+
   useBVH(meshRef);
-  if (props.node?.geometry?.boundingSphere.radius < 20) {
+  if (props.node?.geometry?.boundingSphere.radius < 50) {
     return;
   }
 
@@ -119,7 +123,8 @@ function TruckCloudGTLFGroup({ ...props }) {
         onClick={(e) => {
           e.stopPropagation();
           props.onClick(true);
-          invalidate(0);
+          console.log(props.node.name);
+          // invalidate(0);
         }}
         frustumCulled
       >

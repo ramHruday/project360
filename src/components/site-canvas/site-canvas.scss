@@ -1,3 +1,10 @@
 .site-map-content {
   max-height: 100vh;
 }
+
+.site-controls {
+  z-index: 99999999;
+  top: 2rem;
+  left: 2rem;
+  max-height: 10vh;
+}

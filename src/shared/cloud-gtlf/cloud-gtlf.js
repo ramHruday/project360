@@ -11,11 +11,14 @@ export default function CloudGLTF({ ...props }) {
   const copiedScene = useMemo(() => {
     scene.children.forEach(function (m) {
       if (m.isMesh) {
-        m.material = new THREE.MeshBasicMaterial({ color: m.material.color });
+        m.material = new THREE.MeshBasicMaterial({
+          color: m.material.color,
+        });
       }
     });
     return scene.clone();
-  }, [scene]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [scene.uuid]);
 
   const toggleActiveMesh = (e, meshId) => {
     e.stopPropagation();
@@ -27,7 +30,6 @@ export default function CloudGLTF({ ...props }) {
   };
 
   if (props.fast) {
-    console.log("bleh");
     return (
       <group ref={group} {...props} dispose={null}>
         <primitive object={copiedScene} />

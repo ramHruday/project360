@@ -4,6 +4,7 @@ import { Text } from "@fluentui/react";
 import { Persona, PersonaSize } from "@fluentui/react/lib/Persona";
 import { SearchBox } from "@fluentui/react/lib/SearchBox";
 
+import classNames from "classnames";
 import { CREWS } from "../../config/crews";
 import "./site-list.scss";
 
@@ -29,8 +30,11 @@ function SiteList(props) {
         {items.map((item) => (
           <div
             key={item.id}
-            className="p-2 ms-depth-4 cursor-pointer side-bar-list-item m-1"
-            onClick={() => props.onDismiss?.()}
+            className={classNames(
+              "p-2 ms-depth-4 cursor-pointer side-bar-list-item m-1",
+              { disable: !item.isActive }
+            )}
+            onClick={() => (item.isActive ? props.onDismiss?.() : null)}
           >
             <p className="ms-fontWeight-bold">
               {item.state?.well_name?.data || "Not available (N/A)"}
