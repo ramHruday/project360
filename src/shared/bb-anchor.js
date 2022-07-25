@@ -1,9 +1,9 @@
 import { useFrame } from "@react-three/fiber";
 import * as React from "react";
-import * as THREE from "three";
+import { Box3, Vector3 } from "three";
 
-const boundingBox = new THREE.Box3();
-const boundingBoxSize = new THREE.Vector3();
+const boundingBox = new Box3();
+const boundingBoxSize = new Vector3();
 
 export const BBAnchor = ({ anchor, ...props }) => {
   const ref = React.useRef(null);

@@ -1,39 +1,31 @@
 import { Select, useBVH, useCursor, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import React, { useMemo, useRef, useState } from "react";
-import * as THREE from "three";
+import { MeshBasicMaterial } from "three";
 import { MODELS } from "../../config/azure-gltf";
 import "./truck-cloud-gtlf.scss";
 import TruckParams from "./truck-params";
 // const TRUCK_PARAM_NODES = Object.values(DEFAULT_TRUCK_CONFIG);
 
 export default function TruckCloudGTLF({ ...props }) {
-  const { scene } = useGLTF(props.cloudGlbURL);
   const group = useRef();
 
   useFrame(() => (group.current.visible = props.show), []);
 
   const copiedScene = useMemo(() => {
-    scene.traverse((o) => {
+    props.scene.traverse((o) => {
       if (!o.isMesh) return;
       var prevMaterial = o.material;
-      if (o.geometry?.boundingSphere.radius > 600) {
-        o.material = new THREE.MeshBasicMaterial({
-          color: prevMaterial.color,
-          map: prevMaterial.map,
-          envMap: prevMaterial.envMap,
-        });
-      } else {
-        o.material = new THREE.MeshBasicMaterial({
-          color: prevMaterial.color,
-          map: prevMaterial.map,
-          envMap: prevMaterial.envMap,
-        });
-      }
+
+      o.material = new MeshBasicMaterial({
+        color: prevMaterial.color,
+        map: prevMaterial.map,
+        envMap: prevMaterial.envMap,
+      });
     });
-    return scene.clone();
+    return props.scene.clone();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [scene.uuid]);
+  }, [props.scene.uuid]);
 
   if (props.fast) {
     return (
@@ -102,7 +94,7 @@ function TruckCloudGTLFGroup({ ...props }) {
   }
 
   if (props.node.type.toLowerCase() === "mesh") {
-    // const geometry = new THREE.BufferGeometry({ ...props.node.geometry });
+    // const geometry = new BufferGeometry({ ...props.node.geometry });
     return (
       <mesh
         geometry={props.node.geometry}

@@ -1,3 +1,4 @@
+import { useGLTF } from "@react-three/drei";
 import { EffectComposer, Outline } from "@react-three/postprocessing";
 import { Suspense, useState } from "react";
 import { MODELS } from "../../../config/azure-gltf";
@@ -7,6 +8,8 @@ import CircleLoader from "../../../shared/loader";
 import TruckCloudGTLF from "../../../shared/truck-cloud-gtlf/truck-cloud-gtlf";
 
 function SitePlayGround(props) {
+  const { scene } = useGLTF(MODELS.TRUCK);
+
   const LEFT_POS_START = props.pumpsData.length / 2;
   const ROTATION_LEFT = [0, -Math.PI / 2, 0];
   const ROTATION_RIGHT = [0, Math.PI / 2, 0];
@@ -36,6 +39,7 @@ function SitePlayGround(props) {
                 : props.selected === pump["Pump Position"]
             }
             // show={props.activePumps[pump["Pump Position"]]}
+            scene={scene}
             pump={pump}
             setAlertedParts={props.setAlertedParts}
             rotation={LEFT_POS_START < i ? ROTATION_LEFT : ROTATION_RIGHT}

@@ -20,8 +20,11 @@ function Main() {
   };
 
   useEffect(() => {
-    const timer = setInterval(callAPI, 10000);
-    return () => clearInterval(timer);
+    // const timer = setInterval(
+    //   callAPI,1
+    // );
+    // return () => clearInterval(timer);
+    callAPI();
   }, []);
 
   const toggleSelected = (id) => {
