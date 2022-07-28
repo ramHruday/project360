@@ -55,7 +55,8 @@ export function TruckCloudGTLFGroup({ ...props }) {
           console.log(props.node.name);
           // invalidate(0);
         }}
-        onDoubleClick={() => {
+        onDoubleClick={(e) => {
+          e.stopPropagation();
           props.onDoubleClick();
         }}
         frustumCulled

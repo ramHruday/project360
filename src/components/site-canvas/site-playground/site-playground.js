@@ -1,5 +1,10 @@
 import { IconButton } from "@fluentui/react";
-import { Html, useGLTF } from "@react-three/drei";
+import {
+  Environment,
+  Html,
+  MeshReflectorMaterial,
+  useGLTF,
+} from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { EffectComposer, Outline } from "@react-three/postprocessing";
 import { lazy, Suspense, useMemo, useState } from "react";
@@ -67,12 +72,7 @@ function SitePlayGround(props) {
   return (
     <>
       <Suspense fallback={<CircleLoader />}>
-        {PUMPS.filter(
-          (x) =>
-            !focussedTruck ||
-            (focussedTruck &&
-              x["Pump Position"] === focussedTruck["Pump Position"])
-        ).map((pump, i) => (
+        {PUMPS.map((pump, i) => (
           <TruckCloudGTLF
             key={pump["Pump Position"]}
             position={[
@@ -98,6 +98,10 @@ function SitePlayGround(props) {
               props.selectionOptions["Select All"]
                 ? true
                 : props.selected === pump["Pump Position"]
+            }
+            show={
+              !focussedTruck ||
+              pump["Pump Position"] === focussedTruck["Pump Position"]
             }
             scene={copiedScene}
             pump={pump}
@@ -134,6 +138,21 @@ function SitePlayGround(props) {
             ))}
           </>
         ) : null}
+        <mesh position={[0, -1.5, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+          <planeGeometry args={[50, 50]} />
+          <MeshReflectorMaterial
+            blur={[400, 100]}
+            resolution={1024}
+            mixBlur={1}
+            mixStrength={15}
+            depthScale={1}
+            minDepthThreshold={0.85}
+            color="#151515"
+            metalness={0.6}
+            roughness={1}
+          />
+        </mesh>
+        <Environment preset="dawn" />
       </Suspense>
       <EffectComposer multisampling={8} autoClear={false}>
         <Outline
@@ -143,12 +162,14 @@ function SitePlayGround(props) {
           edgeStrength={5}
         />
       </EffectComposer>
-      <Html>
-        <IconButton
-          className="text-ThemePrimary"
-          iconProps={{ iconName: "Back" }}
-          onClick={() => onFocusTruck(null)}
-        />
+      <Html left>
+        <div>
+          <IconButton
+            className="text-ThemePrimary"
+            iconProps={{ iconName: "Back" }}
+            onClick={() => onFocusTruck(null)}
+          />
+        </div>
       </Html>
     </>
   );
