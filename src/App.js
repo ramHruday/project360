@@ -1,7 +1,9 @@
 import { Stack } from "@fluentui/react";
+import { useGLTF } from "@react-three/drei";
 import "./App.scss";
 import { ProfileContextProvider } from "./auth/profile-context";
 import Header from "./components/header/header";
+import { MODELS } from "./config/azure-gltf";
 import Main from "./pages/main/main";
 import { SiteConfigContextProvider } from "./utils/site-config-context";
 
@@ -25,3 +27,7 @@ function App() {
 }
 
 export default App;
+
+useGLTF.preload(MODELS.TRUCK);
+useGLTF.preload(MODELS.MISSILE);
+useGLTF.preload(MODELS.WELL_HEAD);

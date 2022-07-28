@@ -14,7 +14,6 @@ export const UNIT_MAP = {
   "Calc Horse Power": " hp",
   "PE Oil Pressure": " psi",
   "PE Oil Temp": " degF",
-  "PUMP RATE": "  bbl/min",
   "Trans Gear": " ",
   "Trans Oil Pressure": " psi",
   "Trans Temp": " degF",

@@ -1,10 +1,13 @@
-import { Stack } from "@fluentui/react";
-import { useEffect, useState } from "react";
+import { Spinner, Stack } from "@fluentui/react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { getIntelliData } from "../../api/post";
 import SideBar from "../../components/side-bar/side-bar";
-import SiteCanvas from "../../components/site-canvas/site-canvas";
 import { convertIntelliData } from "../../utils/pump";
+import { useInterval } from "../../utils/utils";
 import "./main.css";
+const SiteCanvas = lazy(() =>
+  import("../../components/site-canvas/site-canvas")
+);
 
 function Main() {
   const [cameraType, setCameraType] = useState("map");
@@ -12,20 +15,25 @@ function Main() {
   const [selected, setSelected] = useState(null);
   const [isAllSelected, setIsAllSelected] = useState(null);
   const [alertedParts, setAlertedParts] = useState(null);
-  const callAPI = () => {
+  const [loading, setLoading] = useState(null);
+
+  const callAPI = (shouldLoad) => {
+    shouldLoad ?? setLoading(true);
     getIntelliData().then((d) => {
       const copy = convertIntelliData(d);
-      setPumpsData(copy.slice(0, 20));
+      setPumpsData(copy);
+      shouldLoad ?? setLoading(false);
     });
   };
 
+  // just first call
   useEffect(() => {
-    // const timer = setInterval(
-    //   callAPI,1
-    // );
-    // return () => clearInterval(timer);
-    callAPI();
+    callAPI(true);
   }, []);
+
+  useInterval(() => {
+    callAPI(false);
+  }, 1000 * 100);
 
   const toggleSelected = (id) => {
     if (selected && selected === id) {
@@ -41,19 +49,25 @@ function Main() {
         <SideBar />
       </Stack.Item>
       <Stack.Item grow={1} className="pb-2 m-2">
-        <SiteCanvas
-          cameraType={cameraType}
-          setCameraType={setCameraType}
-          selected={selected}
-          setSelected={toggleSelected}
-          isAllSelected={isAllSelected}
-          setIsAllSelected={setIsAllSelected}
-          alertedParts={alertedParts}
-          pumpsData={pumpsData}
-          setAlertedParts={(p) => {
-            setAlertedParts(p);
-          }}
-        />
+        {!loading ? (
+          <Suspense fallback={<Spinner />}>
+            <SiteCanvas
+              cameraType={cameraType}
+              setCameraType={setCameraType}
+              selected={selected}
+              setSelected={toggleSelected}
+              isAllSelected={isAllSelected}
+              setIsAllSelected={setIsAllSelected}
+              alertedParts={alertedParts}
+              pumpsData={pumpsData}
+              setAlertedParts={(p) => {
+                setAlertedParts(p);
+              }}
+            />
+          </Suspense>
+        ) : (
+          <Spinner />
+        )}
       </Stack.Item>
     </Stack>
   );

@@ -1,6 +1,6 @@
 import { meshBounds, useGLTF } from "@react-three/drei";
 import { useMemo, useRef } from "react";
-import { MeshBasicMaterial } from "three";
+import { MeshStandardMaterial } from "three";
 
 import "./cloud-gtlf.scss";
 
@@ -11,7 +11,7 @@ export default function CloudGLTF({ ...props }) {
   const copiedScene = useMemo(() => {
     scene.children.forEach(function (m) {
       if (m.isMesh) {
-        m.material = new MeshBasicMaterial({
+        m.material = new MeshStandardMaterial({
           color: m.material.color,
         });
       }

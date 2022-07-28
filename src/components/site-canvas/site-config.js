@@ -2,7 +2,7 @@ export const siteCamera = {
   position: [10, 15, 40],
   fov: 50,
   near: 0.01,
-  far: 5000,
+  far: 1000,
 };
 
 export const canvasStyle = {
@@ -10,7 +10,7 @@ export const canvasStyle = {
   borderRadius: "8px",
 };
 
-export const performance = {
+export const perf = {
   current: 1,
   min: 0.1,
   max: 1,

@@ -1,5 +1,5 @@
 import { Icon } from "@fluentui/react";
-import { Html } from "@react-three/drei";
+import { BBAnchor as DreiBBAnchor, Html } from "@react-three/drei";
 import { DEFAULT_TRUCK_CONFIG } from "../../config/constants";
 import { UNIT_MAP } from "../../config/unit-mapping";
 import { BBAnchor } from "../bb-anchor";
@@ -24,7 +24,7 @@ export default function TruckParams({ ...props }) {
         </BBAnchor>
       ) : null}
       {props.node.name === trans && props.pump["Trans Gear"] ? (
-        <BBAnchor anchor={[1, 0, 1]}>
+        <BBAnchor anchor={[1, 1, 1]}>
           <Html>
             <div className="content">
               <Icon iconName="Settings" />
@@ -33,17 +33,17 @@ export default function TruckParams({ ...props }) {
           </Html>
         </BBAnchor>
       ) : null}
-      {props.node.name === fe && props.pump["Calc Horse Power"] ? (
-        <BBAnchor anchor={[-2, -2, 0]}>
+      {props.node.name === fe && props.pump["Horse Power"] ? (
+        <BBAnchor anchor={[0, 0, 0]}>
           <Html>
             <div className="content">
-              {props.pump["Calc Horse Power"] + UNIT_MAP["Calc Horse Power"]}
+              {props.pump["Horse Power"] + UNIT_MAP["Calc Horse Power"]}
             </div>
           </Html>
         </BBAnchor>
       ) : null}
       {props.node.name === pe && props.pump["Pump Rate"] ? (
-        <BBAnchor anchor={[1, 1, 1]}>
+        <BBAnchor anchor={[0, 0, 0]}>
           <Html>
             <div className="content">
               <Icon iconName="Drop" />
@@ -54,11 +54,11 @@ export default function TruckParams({ ...props }) {
         </BBAnchor>
       ) : null}
       {props.node.name === chassis ? (
-        <BBAnchor anchor={[0, 0, 0]}>
-          <Html transform>
+        <DreiBBAnchor anchor={[0, 0, 0]}>
+          <Html>
             <div className="chassis-content">{props.pump["Pump Position"]}</div>
           </Html>
-        </BBAnchor>
+        </DreiBBAnchor>
       ) : null}
     </>
   );
