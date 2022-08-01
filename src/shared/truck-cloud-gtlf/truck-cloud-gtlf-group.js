@@ -8,6 +8,41 @@ export function TruckCloudGTLFGroup({ ...props }) {
   const [hovered, set] = useState();
   useCursor(hovered, "pointer");
   useBVH(meshRef);
+  const onPointerOver = (e) => {
+    e.stopPropagation();
+
+    if (!props.show) {
+      return;
+    }
+    props.onHover(meshRef);
+    set(true);
+  };
+
+  const onPointerOut = () => {
+    if (!props.show) {
+      return;
+    }
+    set(false);
+    props.onHover(null);
+  };
+
+  const onClick = (e) => {
+    e.stopPropagation();
+
+    if (!props.show) {
+      return;
+    }
+    props.onClick(true);
+  };
+
+  const onDoubleClick = (e) => {
+    e.stopPropagation();
+
+    if (!props.show) {
+      return;
+    }
+    props.onDoubleClick();
+  };
 
   if (props.node.type.toLowerCase() !== "mesh") {
     return (
@@ -40,25 +75,10 @@ export function TruckCloudGTLFGroup({ ...props }) {
         position={props.node.position}
         ref={meshRef}
         scale={props.node.scale}
-        onPointerOver={(e) => {
-          e.stopPropagation();
-          props.onHover(meshRef);
-          set(true);
-        }}
-        onPointerOut={() => {
-          set(false);
-          props.onHover(null);
-        }}
-        onClick={(e) => {
-          e.stopPropagation();
-          props.onClick(true);
-          console.log(props.node.name);
-          // invalidate(0);
-        }}
-        onDoubleClick={(e) => {
-          e.stopPropagation();
-          props.onDoubleClick();
-        }}
+        onPointerOver={onPointerOver}
+        onPointerOut={onPointerOut}
+        onClick={onClick}
+        onDoubleClick={onDoubleClick}
         frustumCulled
       >
         {props.node.children.length > 0 &&

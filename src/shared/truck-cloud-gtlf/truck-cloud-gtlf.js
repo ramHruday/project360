@@ -10,10 +10,10 @@ import "./truck-cloud-gtlf.scss";
 const highlighter = new Box3();
 export default function TruckCloudGTLF({ ...props }) {
   const group = useRef();
-  const iRef = useRef();
+
   useEffect(() => {
     highlighter.setFromObject(props.scene);
-  }, []);
+  }, [props.scene]);
 
   const [indexSet, setIndexSet] = useState(new Set());
 

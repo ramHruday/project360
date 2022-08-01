@@ -2,9 +2,19 @@
   max-height: 100vh;
 }
 
-.site-controls {
+.site-btns {
   z-index: 99999999;
   top: 2rem;
   left: 2rem;
   max-height: 10vh;
+  div {
+    transform: none !important;
+  }
+}
+
+.site-controls {
+  z-index: 99999999;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
 }

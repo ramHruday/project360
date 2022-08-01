@@ -6,7 +6,7 @@ import "./camera-btn.scss";
 function CameraButton(props) {
   const options = [
     { key: "map", text: "Map", iconProps: { iconName: "HandsFree" } },
-    { key: "track", text: "Track", iconProps: { iconName: "Video360Generic" } },
+    // { key: "track", text: "Track", iconProps: { iconName: "Video360Generic" } },
     { key: "orbit", text: "Orbit", iconProps: { iconName: "Add" } },
   ];
   return (

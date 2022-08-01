@@ -1,13 +1,8 @@
 import { IconButton } from "@fluentui/react";
-import {
-  Environment,
-  Html,
-  MeshReflectorMaterial,
-  useGLTF,
-} from "@react-three/drei";
+import { Html, useGLTF } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { EffectComposer, Outline } from "@react-three/postprocessing";
-import { lazy, Suspense, useMemo, useState } from "react";
+import { lazy, memo, Suspense, useMemo, useState } from "react";
 import { MeshBasicMaterial, MeshStandardMaterial } from "three";
 import { MODELS } from "../../../config/azure-gltf";
 import { PUMPS } from "../../../config/pumps";
@@ -16,8 +11,8 @@ import CircleLoader from "../../../shared/loader";
 
 import { isMobile } from "../../../utils/utils";
 
-const TruckCloudGTLF = lazy(() =>
-  import("../../../shared/truck-cloud-gtlf/truck-cloud-gtlf")
+const TruckCloudGTLF = memo(
+  lazy(() => import("../../../shared/truck-cloud-gtlf/truck-cloud-gtlf"))
 );
 const CloudGLTF = lazy(() => import("../../../shared/cloud-gtlf/cloud-gtlf"));
 
@@ -27,7 +22,9 @@ function SitePlayGround(props) {
   const isMob = isMobile();
   const { scene } = useGLTF(MODELS.TRUCK);
   const { camera } = useThree();
-
+  // const PUMPS = props.pumpsData;
+  const focus = (pump) =>
+    !focussedTruck || pump["Pump Position"] === focussedTruck["Pump Position"];
   const copiedScene = useMemo(() => {
     const smallObj = [];
     scene.traverse((o) => {
@@ -43,7 +40,7 @@ function SitePlayGround(props) {
           color: prevMaterial.color,
         });
       } else {
-        if (radius > 200) {
+        if (radius > 500) {
           o.material = new MeshStandardMaterial({
             color: prevMaterial.color,
           });
@@ -82,16 +79,17 @@ function SitePlayGround(props) {
             ]}
             onClick={(show) => {
               props.setSelected(pump["Pump Position"]);
-              console.log(props.selected);
             }}
             onDoubleClick={(show) => {
-              props.setSelected(null);
-              camera.lookAt(
-                scene.position.x,
-                scene.position.y,
-                scene.position.z
-              );
-              onFocusTruck(pump);
+              if (focus(pump)) {
+                props.setSelected(null);
+                camera.lookAt(
+                  scene.position.x,
+                  scene.position.y,
+                  scene.position.z
+                );
+                onFocusTruck(pump);
+              }
             }}
             onHover={onHover}
             isActive={
@@ -120,7 +118,6 @@ function SitePlayGround(props) {
                 console.log("clicked on missile");
               }}
               onHover={onHover}
-              isActive={props.isAllSelected ? true : props.selected === 4347}
               position={[0, 0, 20]}
             />
             {[1].map((pump, i) => (
@@ -131,28 +128,12 @@ function SitePlayGround(props) {
                   console.log("clicked on missile");
                 }}
                 onHover={onHover}
-                isActive={props.isAllSelected ? true : props.selected === 4347}
                 position={[0, -1, -5]}
                 scale={5}
               />
             ))}
           </>
         ) : null}
-        <mesh position={[0, -1.5, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[50, 50]} />
-          <MeshReflectorMaterial
-            blur={[400, 100]}
-            resolution={1024}
-            mixBlur={1}
-            mixStrength={15}
-            depthScale={1}
-            minDepthThreshold={0.85}
-            color="#151515"
-            metalness={0.6}
-            roughness={1}
-          />
-        </mesh>
-        <Environment preset="dawn" />
       </Suspense>
       <EffectComposer multisampling={8} autoClear={false}>
         <Outline
@@ -162,7 +143,7 @@ function SitePlayGround(props) {
           edgeStrength={5}
         />
       </EffectComposer>
-      <Html left>
+      <Html left portal={props.domNodeRef}>
         <div>
           <IconButton
             className="text-ThemePrimary"
