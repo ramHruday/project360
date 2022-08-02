@@ -2,19 +2,26 @@
   max-height: 100vh;
 }
 
-.site-btns {
-  z-index: 99999999;
-  top: 2rem;
-  left: 2rem;
-  max-height: 10vh;
-  div {
-    transform: none !important;
-  }
+.site-btns > div {
+  transform: none !important;
+  top: 2.5rem !important;
+  left: 2rem !important;
 }
 
 .site-controls {
   z-index: 99999999;
   position: absolute;
-  bottom: 1rem;
+  bottom: 0.5rem;
   right: 1rem;
+}
+
+.pump-stats {
+  z-index: 99999999;
+  position: absolute;
+  bottom: 4rem;
+  left: 1rem;
+
+  span {
+    font-family: consolas;
+  }
 }

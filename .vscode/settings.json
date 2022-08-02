@@ -6,5 +6,8 @@
     "metalness",
     "msal",
     "propetro"
-  ]
+  ],
+  "appService.zipIgnorePattern": ["node_modules{,/**}", ".vscode{,/**}"],
+  "appService.defaultWebAppToDeploy": "/subscriptions/88bb7890-fc0a-48f3-b0aa-cce7cda03ba9/microsoft.web/sites/subscriptions/88bb7890-fc0a-48f3-b0aa-cce7cda03ba9/resourceGroups/propetro360/providers/Microsoft.Web/sites/site3D",
+  "appService.deploySubpath": "."
 }

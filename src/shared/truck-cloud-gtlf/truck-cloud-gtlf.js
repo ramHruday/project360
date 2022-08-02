@@ -33,9 +33,6 @@ export default function TruckCloudGTLF({ ...props }) {
       // if (asset["Horse Power"] < 1000 && props.node.name === pe) {
       //   group.current.material.emissive.setHex(0xfe8b8b);
       // }
-      // if (!asset["Trans Gear"] && props.node.name === trans) {
-      //   meshRef.current.material.emissive = 0x3f7b9d;
-      // }
     }, 500);
     return () => clearInterval(interval);
   }, [asset, eI, props, engine, pe, trans]);

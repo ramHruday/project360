@@ -28,20 +28,20 @@ export function TruckCloudGTLFGroup({ ...props }) {
 
   const onClick = (e) => {
     e.stopPropagation();
-
     if (!props.show) {
       return;
     }
-    props.onClick(true);
-  };
+    switch (e.detail) {
+      case 1: {
+        props.onClick(true);
+        break;
+      }
+      default: {
+        props.onDoubleClick();
 
-  const onDoubleClick = (e) => {
-    e.stopPropagation();
-
-    if (!props.show) {
-      return;
+        break;
+      }
     }
-    props.onDoubleClick();
   };
 
   if (props.node.type.toLowerCase() !== "mesh") {
@@ -78,7 +78,6 @@ export function TruckCloudGTLFGroup({ ...props }) {
         onPointerOver={onPointerOver}
         onPointerOut={onPointerOut}
         onClick={onClick}
-        onDoubleClick={onDoubleClick}
         frustumCulled
       >
         {props.node.children.length > 0 &&
@@ -90,7 +89,7 @@ export function TruckCloudGTLFGroup({ ...props }) {
               index={i + props.index}
             />
           ))}
-        {props.isActive ? <TruckParams {...props} /> : null}
+        {props.isActive && props.isFocussed ? <TruckParams {...props} /> : null}
       </mesh>
     );
   }

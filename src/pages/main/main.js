@@ -55,7 +55,7 @@ function Main() {
               cameraType={cameraType}
               setCameraType={setCameraType}
               selected={selected}
-              setSelected={toggleSelected}
+              setSelected={setSelected}
               isAllSelected={isAllSelected}
               setIsAllSelected={setIsAllSelected}
               alertedParts={alertedParts}
