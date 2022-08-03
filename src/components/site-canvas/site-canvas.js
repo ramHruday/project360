@@ -3,7 +3,9 @@ import { AdaptiveEvents } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Leva, useControls } from "leva";
 import { Suspense, useEffect, useRef } from "react";
+import { HIDE_KEYS } from "../../config/hide-keys";
 import { PUMPS } from "../../config/pumps";
+import { UNIT_MAP } from "../../config/unit-mapping";
 
 import CircleLoader from "../../shared/loader";
 import { isMobile } from "../../utils/utils";
@@ -18,9 +20,11 @@ import SitePlayGround from "./site-playground/site-playground";
 function SiteCanvas(props) {
   const domNodeRef = useRef(null);
   const isMob = isMobile();
-  const selectionOptions = useControls({ "Select All": false }, [
-    props.pumpsData,
-  ]);
+  const selectionOptions = useControls(
+    { "Select All": false },
+    [props.pumpsData],
+    { hidden: isMob }
+  );
 
   useEffect(() => {
     if (selectionOptions["Select All"]) {
@@ -64,18 +68,18 @@ function SiteCanvas(props) {
         setCameraType={props.setCameraType}
       />
       <div className="site-controls">
-        <Leva fill collapsed />
+        <Leva fill collapsed hidden={isMob} />
       </div>
       {props.selected ? (
         <div className="pump-stats">
           {Object.entries(
             PUMPS.find((x) => x["Pump Position"] === props.selected)
           )
-            .filter((_, i) => i < 5)
+            .filter((x, i) => !!x[1] && !HIDE_KEYS.includes(x[0]))
             .map((e, i) => (
               <Text key={i} block variant="small">
                 <span className="ms-fontWeight-bold ms-fontColor-white">
-                  {e[0]}: {e[1]}
+                  {e[0]}: {e[1]} {UNIT_MAP[e[0]]}
                 </span>
               </Text>
             ))}

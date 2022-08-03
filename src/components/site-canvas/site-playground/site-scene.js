@@ -46,6 +46,10 @@ export const useMemoisedScene = (scene) => {
 export const ROTATION_LEFT = [0, -Math.PI / 2, 0];
 export const ROTATION_RIGHT = [0, Math.PI / 2, 0];
 
-export const getPos = (LEFT_POS_START, i) => {
-  return [LEFT_POS_START < i ? 10 : -10, 0, (i % LEFT_POS_START) * 4];
+export const getPos = (LEFT_POS_START, i, isOnFocus) => {
+  return [
+    LEFT_POS_START < i ? 10 : -10,
+    0 + isOnFocus * 10,
+    (i % LEFT_POS_START) * 4,
+  ];
 };

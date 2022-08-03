@@ -1,6 +1,6 @@
 import { IconButton } from "@fluentui/react";
 import { Html, useGLTF } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
 import { EffectComposer, Outline } from "@react-three/postprocessing";
 import { lazy, memo, Suspense, useState } from "react";
 import { MODELS } from "../../../config/azure-gltf";
@@ -21,10 +21,11 @@ const CloudGLTF = lazy(() => import("../../../shared/cloud-gtlf/cloud-gtlf"));
 
 function SitePlayGround(props) {
   const [hovered, onHover] = useState(null);
+  const [prevCam, setPrevCam] = useState(null);
   const [focussedTruck, onFocusTruck] = useState(null);
   const { scene } = useGLTF(MODELS.TRUCK);
   const cam = useThree(({ camera }) => camera);
-  useFrame(({ camera }) => console.log(camera));
+  // useFrame(({ camera }) => console.log(camera));
   // const PUMPS = props.pumpsData;
 
   const { copiedScene } = useMemoisedScene(scene);
@@ -42,20 +43,26 @@ function SitePlayGround(props) {
     <>
       <Suspense fallback={<CircleLoader />}>
         {PUMPS.map((pump, i) => {
-          const [x, y, z] = getPos(LEFT_POS_START, i);
+          const [x, y, z] = getPos(
+            LEFT_POS_START,
+            i,
+            focussedTruck &&
+              pump["Pump Position"] === focussedTruck["Pump Position"]
+          );
           return (
             <TruckCloudGTLF
               key={pump["Pump Position"]}
               position={[x, y, z]}
               onClick={() => {
                 props.setSelected(pump["Pump Position"]);
-                console.log(x, y, z);
               }}
               onDoubleClick={() => {
                 if (isOnFocus(pump)) {
+                  // setPrevCam(cam.position);
                   props.setSelected(pump["Pump Position"]);
-                  cam.position.set(4.5 * x, y + 1.5, 3 * z);
                   onFocusTruck(pump);
+                  cam.position.set(4.5 * x, y + 11, 3 * z);
+                  cam.updateMatrixWorld();
                 }
               }}
               onHover={onHover}
@@ -114,7 +121,12 @@ function SitePlayGround(props) {
             <IconButton
               className="text-neutralPrimary bg-themeLighterAlt"
               iconProps={{ iconName: "Back" }}
-              onClick={() => onFocusTruck(null)}
+              onClick={() => {
+                onFocusTruck(null);
+                console.log(prevCam);
+                // cam.position.set(prevCam);
+                cam.updateMatrixWorld();
+              }}
               text="Back to Frac site"
             />
           </div>

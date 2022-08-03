@@ -6,7 +6,7 @@ export const siteCamera = {
 };
 
 export const canvasStyle = {
-  background: "#28282B",
+  background: "#06061d",
   // background: "#354c74",
   borderRadius: "8px",
 };

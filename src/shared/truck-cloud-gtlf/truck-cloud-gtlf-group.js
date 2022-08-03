@@ -89,7 +89,7 @@ export function TruckCloudGTLFGroup({ ...props }) {
               index={i + props.index}
             />
           ))}
-        {props.isActive && props.isFocussed ? <TruckParams {...props} /> : null}
+        {props.isActive || props.isFocussed ? <TruckParams {...props} /> : null}
       </mesh>
     );
   }

@@ -17,7 +17,9 @@ export default function TruckCloudGTLF({ ...props }) {
 
   const [indexSet, setIndexSet] = useState(new Set());
 
-  useFrame(() => (group.current.visible = props.show), []);
+  useFrame(() => {
+    group.current.visible = props.show;
+  });
 
   const [eI, setEI] = useState(1);
   const asset = props.pump;
