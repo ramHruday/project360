@@ -2,11 +2,12 @@ import { IconButton } from "@fluentui/react";
 import { Html, useGLTF } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { EffectComposer, Outline } from "@react-three/postprocessing";
-import { lazy, memo, Suspense, useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { MODELS } from "../../../config/azure-gltf";
-import { PUMPS } from "../../../config/pumps";
+import { PUMPS as HARD_CODED_PUMPS } from "../../../config/pumps";
 
 import CircleLoader from "../../../shared/loader";
+import TruckCloudGTLF from "../../../shared/truck-cloud-gtlf/truck-cloud-gtlf";
 import {
   getPos,
   ROTATION_LEFT,
@@ -14,9 +15,9 @@ import {
   useMemoisedScene,
 } from "./site-scene";
 
-const TruckCloudGTLF = memo(
-  lazy(() => import("../../../shared/truck-cloud-gtlf/truck-cloud-gtlf"))
-);
+// const TruckCloudGTLF = memo(
+//   lazy(() => import("../../../shared/truck-cloud-gtlf/truck-cloud-gtlf"))
+// );
 const CloudGLTF = lazy(() => import("../../../shared/cloud-gtlf/cloud-gtlf"));
 
 function SitePlayGround(props) {
@@ -25,8 +26,8 @@ function SitePlayGround(props) {
   const [focussedTruck, onFocusTruck] = useState(null);
   const { scene } = useGLTF(MODELS.TRUCK);
   const cam = useThree(({ camera }) => camera);
-  // useFrame(({ camera }) => console.log(camera));
-  // const PUMPS = props.pumpsData;
+  const cont = useThree(({ controls }) => controls);
+  const PUMPS = props.pumpsData.length ? props.pumpsData : HARD_CODED_PUMPS;
 
   const { copiedScene } = useMemoisedScene(scene);
 
@@ -59,10 +60,11 @@ function SitePlayGround(props) {
               onDoubleClick={() => {
                 if (isOnFocus(pump)) {
                   setPrevCam(cam.position);
+                  cont?.saveState();
                   props.setSelected(pump["Pump Position"]);
                   onFocusTruck(pump);
                   cam.position.set(4.5 * x, y + 11, 3 * z);
-                  cam.updateMatrixWorld();
+                  // cont?.update();
                 }
               }}
               onHover={onHover}
@@ -125,7 +127,7 @@ function SitePlayGround(props) {
                 onFocusTruck(null);
                 console.log(prevCam);
                 cam.position.set(prevCam);
-                cam.updateMatrixWorld();
+                cont?.reset();
               }}
               text="Back to Frac site"
             />

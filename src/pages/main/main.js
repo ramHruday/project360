@@ -10,7 +10,7 @@ const SiteCanvas = lazy(() =>
 );
 
 function Main() {
-  const [cameraType, setCameraType] = useState("map");
+  const [cameraType, setCameraType] = useState("orbit");
   const [pumpsData, setPumpsData] = useState([]);
   const [selected, setSelected] = useState(null);
   const [isAllSelected, setIsAllSelected] = useState(null);
