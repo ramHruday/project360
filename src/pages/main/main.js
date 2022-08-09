@@ -35,14 +35,6 @@ function Main() {
     callAPI(false);
   }, 1000 * 100);
 
-  const toggleSelected = (id) => {
-    if (selected && selected === id) {
-      setSelected(null);
-    } else {
-      setSelected(id);
-    }
-  };
-
   return (
     <Stack horizontal wrap verticalFill className="main-page">
       <Stack.Item grow={1} className="p-0 ms-hiddenLgDown">

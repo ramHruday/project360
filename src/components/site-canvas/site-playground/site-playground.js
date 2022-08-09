@@ -58,7 +58,7 @@ function SitePlayGround(props) {
               }}
               onDoubleClick={() => {
                 if (isOnFocus(pump)) {
-                  // setPrevCam(cam.position);
+                  setPrevCam(cam.position);
                   props.setSelected(pump["Pump Position"]);
                   onFocusTruck(pump);
                   cam.position.set(4.5 * x, y + 11, 3 * z);
@@ -124,7 +124,7 @@ function SitePlayGround(props) {
               onClick={() => {
                 onFocusTruck(null);
                 console.log(prevCam);
-                // cam.position.set(prevCam);
+                cam.position.set(prevCam);
                 cam.updateMatrixWorld();
               }}
               text="Back to Frac site"
