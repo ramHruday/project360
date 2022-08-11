@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { Text } from "@fluentui/react";
+
 import { Persona, PersonaSize } from "@fluentui/react/lib/Persona";
 import { SearchBox } from "@fluentui/react/lib/SearchBox";
 
@@ -26,7 +27,7 @@ function SiteList(props) {
         onSearch={(newValue) => onFilterChanged(newValue)}
       />
 
-      <div className="side-bar-list overflow-overlay pb-2">
+      <div className="side-bar-list overflow-auto pb-2">
         {items.map((item) => (
           <div
             key={item.id}

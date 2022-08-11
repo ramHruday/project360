@@ -1,18 +1,21 @@
 import { meshBounds, useGLTF } from "@react-three/drei";
-import { useMemo, useRef } from "react";
+import { forwardRef, useMemo, useRef } from "react";
 import { MeshStandardMaterial } from "three";
 
 import "./cloud-gtlf.scss";
 
-export default function CloudGLTF({ ...props }) {
+export const CloudGLTF = forwardRef((props, ref) => {
   const { scene } = useGLTF(props.cloudGlbURL);
-  const group = useRef();
+  // const group = useRef();
 
   const copiedScene = useMemo(() => {
     scene.children.forEach(function (m) {
       if (m.isMesh) {
         m.material = new MeshStandardMaterial({
           color: m.material.color,
+          metalness: 1,
+          emissive: 1,
+          roughness: 0.5,
         });
       }
     });
@@ -31,14 +34,14 @@ export default function CloudGLTF({ ...props }) {
 
   if (props.fast) {
     return (
-      <group ref={group} {...props} dispose={null}>
+      <group ref={ref} {...props} dispose={null}>
         <primitive object={copiedScene} />
       </group>
     );
   }
 
   return (
-    <group ref={group} {...props} dispose={null} className="cursor-pointer">
+    <group ref={ref} {...props} dispose={null} className="cursor-pointer">
       {copiedScene.children.map((_, i) => (
         <CloudGLTFGroup
           key={i + _.name}
@@ -46,11 +49,12 @@ export default function CloudGLTF({ ...props }) {
           node={_}
           toggleActiveMesh={toggleActiveMesh}
           index={i}
+          onHover={() => props.onHover(ref)}
         />
       ))}
     </group>
   );
-}
+});
 
 function CloudGLTFGroup({ ...props }) {
   const meshRef = useRef();
@@ -100,3 +104,5 @@ function CloudGLTFGroup({ ...props }) {
     </mesh>
   );
 }
+
+export default CloudGLTF;

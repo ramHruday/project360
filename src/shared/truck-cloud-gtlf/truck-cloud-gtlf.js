@@ -34,13 +34,7 @@ export default function TruckCloudGTLF({ ...props }) {
   }
 
   return (
-    <group
-      ref={group}
-      {...props}
-      dispose={null}
-      rotateOnAxis={{ axis: [0, 0, 0], angle: 3.14 / 2 }}
-      frustumCulled
-    >
+    <group ref={group} {...props} dispose={null} frustumCulled>
       {props.scene.children.map((_, i) => (
         <TruckCloudGTLFGroup
           key={i + _.name}
