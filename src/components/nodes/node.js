@@ -75,7 +75,7 @@ export function Nodes({ children }) {
               key={index + "Bezier line"}
               {...line}
               color="red"
-              lineWidth={5}
+              lineWidth={3}
               transparent
               opacity={0.5}
             />

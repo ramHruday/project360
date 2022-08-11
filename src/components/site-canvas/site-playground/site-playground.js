@@ -11,6 +11,7 @@ import CircleLoader from "../../../shared/loader";
 import TruckCloudGTLF from "../../../shared/truck-cloud-gtlf/truck-cloud-gtlf";
 import { Node, Nodes } from "../../nodes/node";
 import {
+  BLENDER_VAN_POS,
   DATA_VAN_POS,
   DATA_VAN_ROT,
   getPos,
@@ -156,6 +157,16 @@ function SitePlayGround(props) {
                 onHover={onHover}
                 position={DATA_VAN_POS}
                 rotation={DATA_VAN_ROT}
+              />
+
+              <CloudGLTF
+                cloudGlbURL={MODELS.BLENDER}
+                onClick={(show) => {
+                  console.log("clicked on missile");
+                }}
+                onHover={onHover}
+                position={BLENDER_VAN_POS}
+                rotation={ROTATION_RIGHT}
               />
             </>
           ) : null}

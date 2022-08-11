@@ -31,6 +31,7 @@ export function TruckCloudGTLFGroup({ ...props }) {
 
   const onClick = (e) => {
     e.stopPropagation();
+    console.log(props.node.name);
     if (!props.show) {
       return;
     }
