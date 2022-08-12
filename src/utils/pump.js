@@ -3,7 +3,7 @@ export const convertIntelliData = (d) => {
     .map(([k, v], i) => {
       const m = {};
       v.forEach((p) => {
-        m[p.mnemonic_name] = p.value;
+        m[p.mnemonic_name] = Number(p.value).toFixed(1);
       });
       return { ...m, "Pump Position": k };
     })

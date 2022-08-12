@@ -18,26 +18,27 @@ export default function TruckParams({ ...props }) {
           <Html>
             <div className="content">
               <Icon iconName="LightningBolt" />
-              {props.pump["Engine Load"] + UNIT_MAP["Engine Load"]}
+              {props.pump["Engine Load"].toFixed(1) + UNIT_MAP["Engine Load"]}
             </div>
           </Html>
         </BBAnchor>
       ) : null}
       {props.node.name === trans && props.pump["Trans Gear"] ? (
-        <BBAnchor anchor={[1, 1, 1]}>
+        <DreiBBAnchor anchor={[1, 1, 1]}>
           <Html>
             <div className="content">
               <Icon iconName="Settings" />
-              {props.pump["Trans Gear"] + UNIT_MAP["Trans Gear"]}
+              {props.pump["Trans Gear"].toFixed(1) + UNIT_MAP["Trans Gear"]}
             </div>
           </Html>
-        </BBAnchor>
+        </DreiBBAnchor>
       ) : null}
       {props.node.name === fe && props.pump["Horse Power"] ? (
         <BBAnchor anchor={[0, 0, 0]}>
           <Html>
             <div className="content">
-              {props.pump["Horse Power"] + UNIT_MAP["Calc Horse Power"]}
+              {props.pump["Horse Power"].toFixed(1) +
+                UNIT_MAP["Calc Horse Power"]}
             </div>
           </Html>
         </BBAnchor>
@@ -48,17 +49,17 @@ export default function TruckParams({ ...props }) {
             <div className="content">
               <Icon iconName="Drop" />
 
-              {props.pump["Pump Rate"] + UNIT_MAP["Pump Rate"]}
+              {props.pump["Pump Rate"].toFixed(1) + UNIT_MAP["Pump Rate"]}
             </div>
           </Html>
         </BBAnchor>
       ) : null}
       {props.node.name === chassis ? (
-        <DreiBBAnchor anchor={[0, 0, 0]}>
+        <BBAnchor anchor={[0, 0, 0]}>
           <Html>
             <div className="chassis-content">{props.pump["Pump Position"]}</div>
           </Html>
-        </DreiBBAnchor>
+        </BBAnchor>
       ) : null}
     </>
   );
