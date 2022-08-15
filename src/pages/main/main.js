@@ -2,7 +2,6 @@ import { Spinner, Stack } from "@fluentui/react";
 
 import { lazy, Suspense, useEffect, useState } from "react";
 import { getIntelliData } from "../../api/post";
-import ExpandBtn from "../../components/expand-btn/expand-btn";
 import SideBar from "../../components/side-bar/side-bar";
 import { convertIntelliData } from "../../utils/pump";
 import { useInterval } from "../../utils/utils";
@@ -13,7 +12,6 @@ const SiteCanvas = lazy(() =>
 
 function Main() {
   const [cameraType, setCameraType] = useState("orbit");
-  const [showSideBar, setShowSideBar] = useState(true);
   const [pumpsData, setPumpsData] = useState([]);
   const [selected, setSelected] = useState(null);
   const [isAllSelected, setIsAllSelected] = useState(null);
@@ -40,13 +38,11 @@ function Main() {
 
   return (
     <Stack horizontal wrap verticalFill className="main-page">
-      <ExpandBtn showSideBar={showSideBar} setShowSideBar={setShowSideBar} />
+      {/* <ExpandBtn showSideBar={showSideBar} setShowSideBar={setShowSideBar} /> */}
 
-      {showSideBar ? (
-        <Stack.Item grow={1} className="p-0 ms-hiddenLgDown position-relative">
-          <SideBar />
-        </Stack.Item>
-      ) : null}
+      <Stack.Item grow={1} className="p-0 ms-hiddenLgDown position-relative">
+        <SideBar />
+      </Stack.Item>
       <Stack.Item grow={1} className="pb-2 m-2">
         {!loading ? (
           <Suspense fallback={<Spinner />}>

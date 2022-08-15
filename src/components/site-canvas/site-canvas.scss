@@ -1,5 +1,14 @@
 .site-map-content {
-  max-height: 100vh;
+  max-height: 90vh;
+  &.full-screen {
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    position: fixed;
+  }
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) all;
 }
 
 .site-btns > div {
@@ -22,6 +31,6 @@
   left: 1rem;
 
   span {
-    font-family: consolas;
+    font-family: consolas, monaco, monospace;
   }
 }

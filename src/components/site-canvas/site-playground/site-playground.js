@@ -2,13 +2,13 @@ import { IconButton } from "@fluentui/react";
 import { Html, useGLTF } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { EffectComposer, Outline } from "@react-three/postprocessing";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { lazy, memo, Suspense, useEffect, useRef, useState } from "react";
 import { MODELS } from "../../../config/azure-gltf";
 import { PUMPS as HARD_CODED_PUMPS } from "../../../config/pumps";
 
-import CloudGLTF from "../../../shared/cloud-gtlf/cloud-gtlf";
+// import CloudGLTF from "../../../shared/cloud-gtlf/cloud-gtlf";
 import CircleLoader from "../../../shared/loader";
-import TruckCloudGTLF from "../../../shared/truck-cloud-gtlf/truck-cloud-gtlf";
+// import TruckCloudGTLF from "../../../shared/truck-cloud-gtlf/truck-cloud-gtlf";
 import { Node, Nodes } from "../../nodes/node";
 import {
   BLENDER_VAN_POS,
@@ -23,10 +23,10 @@ import {
   WELL_HEAD_POS,
 } from "./site-scene";
 
-// const TruckCloudGTLF = memo(
-//   lazy(() => import("../../../shared/truck-cloud-gtlf/truck-cloud-gtlf"))
-// );
-// const CloudGLTF = lazy(() => import("../../../shared/cloud-gtlf/cloud-gtlf"));
+const TruckCloudGTLF = memo(
+  lazy(() => import("../../../shared/truck-cloud-gtlf/truck-cloud-gtlf"))
+);
+const CloudGLTF = lazy(() => import("../../../shared/cloud-gtlf/cloud-gtlf"));
 
 function SitePlayGround(props) {
   const mRef = useRef(null);

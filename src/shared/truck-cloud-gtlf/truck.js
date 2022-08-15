@@ -617,5 +617,3 @@ export function Model(props) {
     </group>
   );
 }
-
-useGLTF.preload(MODELS.TRUCK);

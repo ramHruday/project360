@@ -55,5 +55,5 @@ export const WELL_HEAD_POS = [0, -1, -20];
 export const DATA_VAN_POS = [15, 1, -10];
 export const BLENDER_VAN_POS = [10, -1, 35];
 export const MISSILE_POS = [0, 0, 20];
-export const MISSILE_NODE_POS = [0, 0, 13];
+export const MISSILE_NODE_POS = [0, 1, 20];
 export const DATA_VAN_ROT = [0, Math.PI / 2, 0];

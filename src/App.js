@@ -27,7 +27,4 @@ function App() {
 }
 
 export default App;
-
-useGLTF.preload(MODELS.TRUCK);
-useGLTF.preload(MODELS.MISSILE);
-useGLTF.preload(MODELS.WELL_HEAD);
+Object.entries(MODELS).forEach((x) => useGLTF.preload(x));

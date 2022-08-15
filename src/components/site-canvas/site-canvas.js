@@ -2,7 +2,7 @@ import { Stack, Text } from "@fluentui/react";
 import { AdaptiveEvents } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Leva, useControls } from "leva";
-import { Suspense, useEffect, useRef } from "react";
+import { lazy, Suspense, useEffect, useRef } from "react";
 import { HIDE_KEYS } from "../../config/hide-keys";
 import { PUMPS } from "../../config/pumps";
 import { UNIT_MAP } from "../../config/unit-mapping";
@@ -14,8 +14,8 @@ import CameraHandler from "./camera/camera-handler";
 import "./site-canvas.scss";
 import { canvasStyle, perf, siteCamera } from "./site-config";
 import SiteLights from "./site-lights";
-import SitePlayGround from "./site-playground/site-playground";
-// const SitePlayGround = lazy(() => import("./site-playground/site-playground"));
+// import SitePlayGround from "./site-playground/site-playground";
+const SitePlayGround = lazy(() => import("./site-playground/site-playground"));
 
 function SiteCanvas(props) {
   const domNodeRef = useRef(null);
@@ -34,7 +34,6 @@ function SiteCanvas(props) {
 
   return (
     <Stack className="position-relative site-map-content" verticalFill>
-      {/* <SiteControls {...props} /> */}
       <div ref={domNodeRef} className="site-btns"></div>
       <Canvas
         id="site-map"
