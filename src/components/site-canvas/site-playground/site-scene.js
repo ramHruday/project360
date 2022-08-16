@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { MeshBasicMaterial, MeshStandardMaterial } from "three";
 import { isMobile } from "../../../utils/utils";
 
-export const useMemoisedScene = (scene) => {
+export const useMemoisedScene = (scene, isFast) => {
   const isMob = isMobile();
 
   const copiedScene = useMemo(() => {
@@ -11,10 +11,10 @@ export const useMemoisedScene = (scene) => {
       if (!o.isMesh) return;
       var prevMaterial = o.material;
       let radius = o.geometry?.boundingSphere.radius;
-      if (radius > 10 && radius < 30) {
-        smallObj.push(o);
-        console.log(o);
-      }
+      // if (radius > 10 && radius < 30) {
+      //   smallObj.push(o);
+      //   console.log(o);
+      // }
       if (isMob || radius < 200) {
         o.material = new MeshBasicMaterial({
           color: prevMaterial.color,

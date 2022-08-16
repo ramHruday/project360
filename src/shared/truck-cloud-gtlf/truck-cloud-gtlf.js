@@ -3,6 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import React, { useRef, useState } from "react";
 import { TruckCloudGTLFGroup } from "./truck-cloud-gtlf-group";
 import "./truck-cloud-gtlf.scss";
+// const TruckCloudGTLFGroup = lazy(() => import("./truck-cloud-gtlf-group"));
 
 export default function TruckCloudGTLF({ ...props }) {
   const group = useRef();
@@ -21,7 +22,6 @@ export default function TruckCloudGTLF({ ...props }) {
           multiple
           onChange={(m) => {
             if (m[0]) {
-              console.log(m[0]);
               props.onHover(m[0]);
               props.onClick(true);
             }

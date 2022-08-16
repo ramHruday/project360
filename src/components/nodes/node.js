@@ -62,7 +62,7 @@ export function Nodes({ children }) {
     <context.Provider value={set}>
       <group ref={group}>
         {lines.map((line, index) => (
-          <group>
+          <group key={index + "Bezier group"}>
             <QuadraticBezierLine
               key={index + "Bezier spot"}
               {...line}

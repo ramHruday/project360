@@ -12,7 +12,7 @@ function SidePanelBtn() {
   return (
     <>
       <IconButton
-        className="ms-hiddenXl bg-themeLighter"
+        className="ms-hiddenLgUp bg-themeLighter"
         iconProps={{ iconName: "ExpandMenu" }}
         onClick={openPanel}
       />

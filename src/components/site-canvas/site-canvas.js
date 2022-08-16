@@ -48,7 +48,7 @@ function SiteCanvas(props) {
           props.setSelected(null);
         }}
       >
-        <Suspense fallback={<CircleLoader />}>
+        <Suspense fallback={<CircleLoader text="blender" />}>
           <SiteLights />
           <SitePlayGround
             {...props}

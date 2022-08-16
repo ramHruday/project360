@@ -5,12 +5,8 @@ import { UNIT_MAP } from "../../config/unit-mapping";
 import { BBAnchor } from "../bb-anchor";
 
 export default function TruckParams({ ...props }) {
-  // const {
   const { engine, trans, pe, fe, chassis } = DEFAULT_TRUCK_CONFIG;
-  //   isAllSelected,
-  // } = useContext(SiteConfigContext);
-  // console.log(engine === props.node.name && props.pump["Engine Load"]);
-  // console.log(props.pump["Pump Rate"], props.pump["Pump Position"]);
+
   return (
     <>
       {props.node.name === engine && props.pump["Engine Load"] ? (

@@ -21,7 +21,8 @@ export function TruckCloudGTLFGroup({ ...props }) {
     set(true);
   };
 
-  const onPointerOut = () => {
+  const onPointerOut = (e) => {
+    e.stopPropagation();
     if (!props.show) {
       return;
     }

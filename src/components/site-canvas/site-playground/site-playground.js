@@ -2,12 +2,12 @@ import { IconButton } from "@fluentui/react";
 import { Html, useGLTF } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { EffectComposer, Outline } from "@react-three/postprocessing";
-import { lazy, memo, Suspense, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MODELS } from "../../../config/azure-gltf";
 import { PUMPS as HARD_CODED_PUMPS } from "../../../config/pumps";
 
-// import CloudGLTF from "../../../shared/cloud-gtlf/cloud-gtlf";
-import CircleLoader from "../../../shared/loader";
+import CloudGLTF from "../../../shared/cloud-gtlf/cloud-gtlf";
+import { isMobile } from "../../../utils/utils";
 // import TruckCloudGTLF from "../../../shared/truck-cloud-gtlf/truck-cloud-gtlf";
 import { Node, Nodes } from "../../nodes/node";
 import {
@@ -23,12 +23,10 @@ import {
   WELL_HEAD_POS,
 } from "./site-scene";
 
-const TruckCloudGTLF = memo(
-  lazy(() => import("../../../shared/truck-cloud-gtlf/truck-cloud-gtlf"))
-);
-const CloudGLTF = lazy(() => import("../../../shared/cloud-gtlf/cloud-gtlf"));
+import TruckCloudGTLF from "../../../shared/truck-cloud-gtlf/truck-cloud-gtlf";
 
 function SitePlayGround(props) {
+  const isMob = isMobile();
   const mRef = useRef(null);
   const nCRef = useRef(null);
   const wRef = useRef(null);
@@ -48,6 +46,7 @@ function SitePlayGround(props) {
   useEffect(() => {
     focussedTruck && props.setSelected(focussedTruck["Pump Position"]);
   }, [focussedTruck, props]);
+
   function restoreCamera() {
     cam.position.set(
       prevCam.position.x,
@@ -67,111 +66,101 @@ function SitePlayGround(props) {
 
   return (
     <>
-      <Suspense fallback={<CircleLoader />}>
-        <Nodes>
-          {PUMPS.map((pump, i) => {
-            const [x, y, z] = getPos(
-              LEFT_POS_START,
-              i,
-              focussedTruck &&
-                pump["Pump Position"] === focussedTruck["Pump Position"]
-            );
-            return (
-              <TruckCloudGTLF
-                key={pump["Pump Position"]}
-                position={[x, y, z]}
-                onClick={() => {
+      <Nodes>
+        {PUMPS.map((pump, i) => {
+          const [x, y, z] = getPos(
+            LEFT_POS_START,
+            i,
+            focussedTruck &&
+              pump["Pump Position"] === focussedTruck["Pump Position"]
+          );
+          return (
+            <TruckCloudGTLF
+              key={pump["Pump Position"]}
+              position={[x, y, z]}
+              onClick={() => {
+                props.setSelected(pump["Pump Position"]);
+                invalidate();
+              }}
+              onDoubleClick={() => {
+                if (isOnFocus(pump)) {
+                  cont?.saveState();
+                  const camToSave = {};
+                  camToSave.position = cam.position.clone();
+                  camToSave.rotation = cam.rotation.clone();
+                  camToSave.controlCenter = cont?.target?.clone();
+
+                  setPrevCam(camToSave);
+
                   props.setSelected(pump["Pump Position"]);
+                  onFocusTruck(pump);
+                  cam.position.set(4.5 * x, y + 9, 3 * z);
                   invalidate();
-                }}
-                onDoubleClick={() => {
-                  if (isOnFocus(pump)) {
-                    cont?.saveState();
-                    const camToSave = {};
-                    camToSave.position = cam.position.clone();
-                    camToSave.rotation = cam.rotation.clone();
-                    camToSave.controlCenter = cont?.target?.clone();
-
-                    setPrevCam(camToSave);
-
-                    props.setSelected(pump["Pump Position"]);
-                    onFocusTruck(pump);
-                    cam.position.set(4.5 * x, y + 9, 3 * z);
-                    invalidate();
-                  }
-                }}
-                onHover={onHover}
-                isActive={
-                  props.selectionOptions["Select All"] || isActive(pump)
                 }
-                show={isOnFocus(pump)}
-                isFocussed={
-                  focussedTruck &&
-                  pump["Pump Position"] === focussedTruck["Pump Position"]
-                }
-                scene={copiedScene}
-                pump={pump}
-                setAlertedParts={props.setAlertedParts}
-                rotation={LEFT_POS_START < i ? ROTATION_LEFT : ROTATION_RIGHT}
-                cloudGlbURL={MODELS.TRUCK}
-                scale={focussedTruck ? 2 : 1}
-              />
-            );
-          })}
+              }}
+              onHover={onHover}
+              isActive={props.selectionOptions["Select All"] || isActive(pump)}
+              show={isOnFocus(pump)}
+              isFocussed={
+                focussedTruck &&
+                pump["Pump Position"] === focussedTruck["Pump Position"]
+              }
+              scene={copiedScene}
+              pump={pump}
+              setAlertedParts={props.setAlertedParts}
+              rotation={LEFT_POS_START < i ? ROTATION_LEFT : ROTATION_RIGHT}
+              cloudGlbURL={MODELS.TRUCK}
+              scale={focussedTruck ? 2 : 1}
+            />
+          );
+        })}
 
-          {!focussedTruck ? (
-            <>
-              <CloudGLTF
-                ref={mRef}
-                cloudGlbURL={MODELS.MISSILE}
-                assetId={4347}
-                onClick={(show) => {
-                  console.log("clicked on missile");
-                }}
-                onHover={onHover}
-                position={MISSILE_POS}
-              />
-              <Node
-                ref={nCRef}
-                name="missile"
-                position={MISSILE_NODE_POS}
-                connectedTo={[wRef]}
-              />
-              <CloudGLTF
-                ref={wRef}
-                cloudGlbURL={MODELS.WELL_HEAD}
-                onClick={(show) => {
-                  console.log("clicked on missile");
-                }}
-                onHover={onHover}
-                position={WELL_HEAD_POS}
-                scale={5}
-              />
+        {!focussedTruck ? (
+          <>
+            <CloudGLTF
+              ref={mRef}
+              cloudGlbURL={MODELS.MISSILE}
+              assetId={4347}
+              onClick={(show) => null}
+              onHover={onHover}
+              position={MISSILE_POS}
+            />
+            <Node
+              ref={nCRef}
+              name="missile"
+              position={MISSILE_NODE_POS}
+              connectedTo={[wRef]}
+            />
+            <CloudGLTF
+              ref={wRef}
+              cloudGlbURL={MODELS.WELL_HEAD}
+              onClick={(show) => null}
+              onHover={onHover}
+              position={WELL_HEAD_POS}
+              scale={5}
+            />
 
-              <CloudGLTF
-                ref={dRef}
-                cloudGlbURL={MODELS.DATA_VAN}
-                onClick={(show) => {
-                  console.log("clicked on missile");
-                }}
-                onHover={onHover}
-                position={DATA_VAN_POS}
-                rotation={DATA_VAN_ROT}
-              />
-
-              <CloudGLTF
-                cloudGlbURL={MODELS.BLENDER}
-                onClick={(show) => {
-                  console.log("clicked on missile");
-                }}
-                onHover={onHover}
-                position={BLENDER_VAN_POS}
-                rotation={ROTATION_RIGHT}
-              />
-            </>
-          ) : null}
-        </Nodes>
-      </Suspense>
+            <CloudGLTF
+              ref={dRef}
+              cloudGlbURL={MODELS.DATA_VAN}
+              onClick={(show) => null}
+              onHover={onHover}
+              position={DATA_VAN_POS}
+              rotation={DATA_VAN_ROT}
+            />
+          </>
+        ) : null}
+        {!isMob && !focussedTruck ? (
+          <CloudGLTF
+            cloudGlbURL={MODELS.BLENDER}
+            onClick={(show) => null}
+            fast
+            onHover={onHover}
+            position={BLENDER_VAN_POS}
+            rotation={ROTATION_RIGHT}
+          />
+        ) : null}
+      </Nodes>
 
       <EffectComposer multisampling={8} autoClear={false}>
         <Outline

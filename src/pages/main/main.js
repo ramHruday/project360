@@ -1,6 +1,6 @@
 import { Spinner, Stack } from "@fluentui/react";
 
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { getIntelliData } from "../../api/post";
 import SideBar from "../../components/side-bar/side-bar";
 import { convertIntelliData } from "../../utils/pump";
@@ -17,12 +17,16 @@ function Main() {
   const [isAllSelected, setIsAllSelected] = useState(null);
   const [alertedParts, setAlertedParts] = useState(null);
   const [loading, setLoading] = useState(null);
+  const [interval, setInterval] = useState(100);
 
   const callAPI = (shouldLoad) => {
     shouldLoad ?? setLoading(true);
     getIntelliData().then((d) => {
       const copy = convertIntelliData(d);
       setPumpsData(copy);
+      if (!copy.length) {
+        setInterval(500);
+      }
       shouldLoad ?? setLoading(false);
     });
   };
@@ -34,32 +38,30 @@ function Main() {
 
   useInterval(() => {
     callAPI(false);
-  }, 1000 * 100);
+  }, 1000 * interval);
 
   return (
     <Stack horizontal wrap verticalFill className="main-page">
       {/* <ExpandBtn showSideBar={showSideBar} setShowSideBar={setShowSideBar} /> */}
 
-      <Stack.Item grow={1} className="p-0 ms-hiddenLgDown position-relative">
+      <Stack.Item grow={1} className="p-0 ms-hiddenMdDown position-relative">
         <SideBar />
       </Stack.Item>
       <Stack.Item grow={1} className="pb-2 m-2">
         {!loading ? (
-          <Suspense fallback={<Spinner />}>
-            <SiteCanvas
-              cameraType={cameraType}
-              setCameraType={setCameraType}
-              selected={selected}
-              setSelected={setSelected}
-              isAllSelected={isAllSelected}
-              setIsAllSelected={setIsAllSelected}
-              alertedParts={alertedParts}
-              pumpsData={pumpsData}
-              setAlertedParts={(p) => {
-                setAlertedParts(p);
-              }}
-            />
-          </Suspense>
+          <SiteCanvas
+            cameraType={cameraType}
+            setCameraType={setCameraType}
+            selected={selected}
+            setSelected={setSelected}
+            isAllSelected={isAllSelected}
+            setIsAllSelected={setIsAllSelected}
+            alertedParts={alertedParts}
+            pumpsData={pumpsData}
+            setAlertedParts={(p) => {
+              setAlertedParts(p);
+            }}
+          />
         ) : (
           <Spinner />
         )}

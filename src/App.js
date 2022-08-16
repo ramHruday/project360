@@ -6,7 +6,9 @@ import Header from "./components/header/header";
 import { MODELS } from "./config/azure-gltf";
 import Main from "./pages/main/main";
 import { SiteConfigContextProvider } from "./utils/site-config-context";
+import { isMobile } from "./utils/utils";
 
+const isMob = isMobile();
 function App() {
   return (
     <SiteConfigContextProvider>
@@ -27,4 +29,6 @@ function App() {
 }
 
 export default App;
-Object.entries(MODELS).forEach((x) => useGLTF.preload(x));
+Object.entries(MODELS)
+  .filter((x) => !isMob || x[0] !== "BLENDER")
+  .forEach((x) => useGLTF.preload(x[1]));

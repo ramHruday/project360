@@ -2,7 +2,7 @@ export const UNIT_MAP = {
   "Calc Pump Rate": " rpm",
   "Calc Stroke Rate": " Stroke/min",
   "Calc Trans RPM": " rpm",
-  "Pump Rate": " psi",
+  "Pump Rate": " bbl/min",
   "Suction Pressure": " psi",
   "DUAL FUEL RATIO": " %",
   "Engine Coolant Temp": " degF",
