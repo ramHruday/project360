@@ -8,7 +8,7 @@ export function TruckCloudGTLFGroup({ ...props }) {
   const [hovered, set] = useState();
   useCursor(hovered, "pointer");
   useBVH(meshRef);
-  if (props.index > 300) {
+  if (props.index > 100) {
     return;
   }
   const onPointerOver = (e) => {

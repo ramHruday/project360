@@ -8,16 +8,19 @@ export const useMemoisedScene = (scene, isFast) => {
   const copiedScene = useMemo(() => {
     const smallObj = [];
     scene.traverse((o) => {
-      if (!o.isMesh) return;
+      if (!o.isMesh) {
+        console.log(o);
+        return;
+      }
       var prevMaterial = o.material;
       let radius = o.geometry?.boundingSphere.radius;
-      // if (radius > 10 && radius < 30) {
-      //   smallObj.push(o);
-      //   console.log(o);
-      // }
-      if (isMob || radius < 200) {
+      if (radius > 10 && radius < 30) {
+        smallObj.push(o);
+      }
+      if (isMob || radius < 100000) {
         o.material = new MeshBasicMaterial({
           color: prevMaterial.color,
+          reflectivity: 1,
         });
       } else {
         o.material = new MeshStandardMaterial({

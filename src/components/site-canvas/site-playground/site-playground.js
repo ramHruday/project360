@@ -2,7 +2,7 @@ import { IconButton } from "@fluentui/react";
 import { Html, useGLTF } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { EffectComposer, Outline } from "@react-three/postprocessing";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { MODELS } from "../../../config/azure-gltf";
 import { PUMPS as HARD_CODED_PUMPS } from "../../../config/pumps";
 
@@ -67,53 +67,57 @@ function SitePlayGround(props) {
   return (
     <>
       <Nodes>
-        {PUMPS.map((pump, i) => {
-          const [x, y, z] = getPos(
-            LEFT_POS_START,
-            i,
-            focussedTruck &&
-              pump["Pump Position"] === focussedTruck["Pump Position"]
-          );
-          return (
-            <TruckCloudGTLF
-              key={pump["Pump Position"]}
-              position={[x, y, z]}
-              onClick={() => {
-                props.setSelected(pump["Pump Position"]);
-                invalidate();
-              }}
-              onDoubleClick={() => {
-                if (isOnFocus(pump)) {
-                  cont?.saveState();
-                  const camToSave = {};
-                  camToSave.position = cam.position.clone();
-                  camToSave.rotation = cam.rotation.clone();
-                  camToSave.controlCenter = cont?.target?.clone();
-
-                  setPrevCam(camToSave);
-
-                  props.setSelected(pump["Pump Position"]);
-                  onFocusTruck(pump);
-                  cam.position.set(4.5 * x, y + 9, 3 * z);
-                  invalidate();
-                }
-              }}
-              onHover={onHover}
-              isActive={props.selectionOptions["Select All"] || isActive(pump)}
-              show={isOnFocus(pump)}
-              isFocussed={
-                focussedTruck &&
+        <Suspense fallback={null}>
+          {PUMPS.map((pump, i) => {
+            const [x, y, z] = getPos(
+              LEFT_POS_START,
+              i,
+              focussedTruck &&
                 pump["Pump Position"] === focussedTruck["Pump Position"]
-              }
-              scene={copiedScene}
-              pump={pump}
-              setAlertedParts={props.setAlertedParts}
-              rotation={LEFT_POS_START < i ? ROTATION_LEFT : ROTATION_RIGHT}
-              cloudGlbURL={MODELS.TRUCK}
-              scale={focussedTruck ? 2 : 1}
-            />
-          );
-        })}
+            );
+            return (
+              <TruckCloudGTLF
+                key={pump["Pump Position"]}
+                position={[x, y, z]}
+                onClick={() => {
+                  props.setSelected(pump["Pump Position"]);
+                  invalidate();
+                }}
+                onDoubleClick={() => {
+                  if (isOnFocus(pump)) {
+                    cont?.saveState();
+                    const camToSave = {};
+                    camToSave.position = cam.position.clone();
+                    camToSave.rotation = cam.rotation.clone();
+                    camToSave.controlCenter = cont?.target?.clone();
+
+                    setPrevCam(camToSave);
+
+                    props.setSelected(pump["Pump Position"]);
+                    onFocusTruck(pump);
+                    cam.position.set(4.5 * x, y + 9, 3 * z);
+                    invalidate();
+                  }
+                }}
+                onHover={onHover}
+                isActive={
+                  props.selectionOptions["Select All"] || isActive(pump)
+                }
+                show={isOnFocus(pump)}
+                isFocussed={
+                  focussedTruck &&
+                  pump["Pump Position"] === focussedTruck["Pump Position"]
+                }
+                scene={copiedScene}
+                pump={pump}
+                setAlertedParts={props.setAlertedParts}
+                rotation={LEFT_POS_START < i ? ROTATION_LEFT : ROTATION_RIGHT}
+                cloudGlbURL={MODELS.TRUCK}
+                scale={focussedTruck ? 2 : 1}
+              />
+            );
+          })}
+        </Suspense>
 
         {!focussedTruck ? (
           <>

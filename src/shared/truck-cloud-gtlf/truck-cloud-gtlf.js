@@ -1,14 +1,12 @@
 import { Select } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { TruckCloudGTLFGroup } from "./truck-cloud-gtlf-group";
 import "./truck-cloud-gtlf.scss";
 // const TruckCloudGTLFGroup = lazy(() => import("./truck-cloud-gtlf-group"));
 
 export default function TruckCloudGTLF({ ...props }) {
   const group = useRef();
-
-  const [indexSet, setIndexSet] = useState(new Set());
 
   useFrame(() => {
     group.current.visible = props.show;
@@ -36,14 +34,7 @@ export default function TruckCloudGTLF({ ...props }) {
   return (
     <group ref={group} {...props} dispose={null} frustumCulled>
       {props.scene.children.map((_, i) => (
-        <TruckCloudGTLFGroup
-          key={i + _.name}
-          {...props}
-          node={_}
-          index={i}
-          indexSet={indexSet}
-          setIndexSet={setIndexSet}
-        />
+        <TruckCloudGTLFGroup key={i + _.name} {...props} node={_} index={i} />
       ))}
     </group>
   );

@@ -1,14 +1,16 @@
 import { Spinner, Stack } from "@fluentui/react";
 
-import { lazy, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getIntelliData } from "../../api/post";
 import SideBar from "../../components/side-bar/side-bar";
 import { convertIntelliData } from "../../utils/pump";
 import { useInterval } from "../../utils/utils";
 import "./main.css";
-const SiteCanvas = lazy(() =>
-  import("../../components/site-canvas/site-canvas")
-);
+// const SiteCanvas = lazy(() =>
+//   import("../../components/site-canvas/site-canvas")
+// );
+
+import SiteCanvas from "../../components/site-canvas/site-canvas";
 
 function Main() {
   const [cameraType, setCameraType] = useState("orbit");
