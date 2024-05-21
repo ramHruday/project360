@@ -9,7 +9,6 @@ export const useMemoisedScene = (scene, isFast) => {
     const smallObj = [];
     scene.traverse((o) => {
       if (!o.isMesh) {
-        console.log(o);
         return;
       }
       var prevMaterial = o.material;

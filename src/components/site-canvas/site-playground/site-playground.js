@@ -37,7 +37,7 @@ function SitePlayGround(props) {
   const { scene } = useGLTF(MODELS.TRUCK);
   const cam = useThree(({ camera }) => camera);
   const cont = useThree(({ controls }) => controls);
-  const PUMPS = props.pumpsData.length ? props.pumpsData : HARD_CODED_PUMPS;
+  const PUMPS = props.pumpsData.length ? props.pumpsData : HARD_CODED_PUMPS.slice(0,10);
   const { copiedScene } = useMemoisedScene(scene);
   const invalidate = useThree(({ invalidate }) => invalidate);
   const isOnFocus = (pump) =>

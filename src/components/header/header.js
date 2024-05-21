@@ -54,7 +54,7 @@ function Header() {
       >
         <SidePanelBtn />
         <img
-          src="https://d1io3yog0oux5.cloudfront.net/_095300291fa1e4b626a3ffdcc5fc423f/propetroservices/files/theme/images/header-logo.svg"
+          src="https://www.propetroservices.com/wp-content/uploads/2023/11/rsz_propetro_blackred.png"
           alt="ProPetro logo"
           style={{ width: "13.5rem" }}
         />

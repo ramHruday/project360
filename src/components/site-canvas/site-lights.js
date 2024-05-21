@@ -5,7 +5,7 @@ function SiteLights(props) {
     <>
       {/* <pointLight position={[10, 10, 10]} intensity={0.5} />
       <spotLight position={[0, -1, -5]} intensity={1} castShadow /> */}
-      <Environment preset="apartment" />
+      {/* <Environment preset="city"/> */}
       <pointLight position={[10, 10, 10]} intensity={0.5} />
       <GizmoHelper alignment="top-right" renderPriority={99}>
         <GizmoViewcube />
