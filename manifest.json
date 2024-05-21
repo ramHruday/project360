@@ -1,0 +1,28 @@
+{
+  "name": "Propetro Site 360",
+  "short_name": "Site 360",
+  "start_url": ".",
+  "icons": [
+    {
+      "src": "./assets/images/maskable_icon_x48.png",
+      "type": "image/png",
+      "sizes": "48x48",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "./assets/images/maskable_icon_x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "./assets/images/maskable_icon_x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable any"
+    }
+  ],
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "theme_color": "#00875a"
+}
